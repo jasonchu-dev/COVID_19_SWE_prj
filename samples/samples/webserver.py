@@ -7,7 +7,8 @@ class echoHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('content-type', 'text/html')
         self.end_headers()
-        self.wfile.write('Hello World'.encode()) #print the path leading after html address
+        self.wfile.write('server connected!'.encode()) #print to client webpage that server connected for confirmation
+        print('client connected!') #print to terminal that client connected for confirmation
         #self.wfile.write(self.path[1:].encode()) #print the path leading after html address
 
 def main():
