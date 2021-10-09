@@ -1,0 +1,14 @@
+Here are the the inspos and guides for using this django/html project:
+
+
+For WHOLE PROJECT INIT Set Up and GUIDE: 
+Start at ch2(full proj set up):
+https://djangoforbeginners.com/hello-world/
+then ch 3(adding index.html template with config from geeksforgeeks): 
+https://djangoforbeginners.com/pages-app/
+
+For index.html button only: 
+https://www.geeksforgeeks.org/render-html-forms-get-post-in-django/
+
+to run server on port 8000:
+(helloworld)% python manage.py runserver
