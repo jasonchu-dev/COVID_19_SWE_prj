@@ -1,0 +1,20 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<form name="Name" action="" method="get">
+	<label for="your_name">Your name: </label>
+	<input id="your_name" type="text" name="your_name">
+	<input type="submit" value="OK">
+</form>
+<form name="Search" action="test_search.php" method="post">
+	<select name="search_drop-down">
+		<option value="race/ethnicity">race/ethnicity</option>
+		<option value="gender">gender</option>
+		<option value="age">age</option>
+		<option value="date">date</option>
+	</select>
+	<input id="search_box" type="text" name="search_box">
+	<input type="submit" value="Search">
+</form>
+{% endblock content %}
