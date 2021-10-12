@@ -23,3 +23,21 @@ with open("c19demographics.csv", "r") as csvfile:
 
 with open("c19demographics.json", "w") as jsonfile:
     jsonfile.write(json.dumps(rows, indent=3))
+
+#clear rows for next set
+rows.clear()
+
+#reading other csv file
+with open("c19county.csv", "r") as csvfile:
+    # creating a csv reader object
+    csvreader = csv.reader(csvfile)
+      
+    # extracting field names through first row
+    fields = next(csvreader)
+  
+    # extracting each data row one by one
+    for row in csvreader:
+        rows.append(row)
+
+with open("c19county.json", "w") as jsonfile:
+    jsonfile.write(json.dumps(rows, indent=3))
