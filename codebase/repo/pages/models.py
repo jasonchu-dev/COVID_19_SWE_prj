@@ -40,6 +40,41 @@ with open("c19demographics.csv", "r") as csvfile:
 
 
 
+
+
+# reading csv file
+with open("c19county.csv", "r") as csvfile:
+    # creating a csv reader object
+    csvreader = csv.DictReader(csvfile)
+
+    with open("c19county.json", "w") as jsonfile:
+        fieldnames = [
+            'county',
+            'administered_date',
+            'total_doses',
+            'cumulative_total_doses',
+            'pfizer_doses',
+            'cumulative_pfizer_doses',
+            'moderna_doses',
+            'cumulative_moderna_doses',
+            'jj_doses',
+            'cumulative_jj_doses',
+            'partially_vaccinated',
+            'total_partially_vaccinated',
+            'fully_vaccinated',
+            'cumulative_fully_vaccinated',
+            'at_least_one_dose',
+            'cumulative_at_least_one_dose',
+            'california_flag'
+        ]
+        jsonwriter = csv.DictWriter(jsonfile, fieldnames=fieldnames, delimiter='\t')
+        
+        jsonwriter.writeheader()
+
+        for row in csvreader:
+            jsonwriter.writerow(row)
+
+
 # # old code
 # #reading other csv file
 # with open("c19county.csv", "r") as csvfile:
