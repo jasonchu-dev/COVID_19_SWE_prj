@@ -2,9 +2,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action = "" method = "get">
-	<label for="Search">Search: </label>
-	<input id="seach" type="text" name="your_search">
-	<input type="submit" value="Go">
+<form name="Search" action="" method="post">
+	<select name="search_drop-down">
+		<option value="race/ethnicity">race/ethnicity</option>
+		<option value="gender">gender</option>
+		<option value="age">age</option>
+		<option value="date">date</option>
+	</select>
+	<input id="search_box" type="text" name="search_box">
+	<input type="submit" value="Search">
 </form>
 {% endblock content %}
