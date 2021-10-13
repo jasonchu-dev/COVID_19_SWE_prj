@@ -27,6 +27,25 @@ def csv_to_json(csvFilePath, jsonFilePath):
         jsonString = json.dumps(jsonArray, indent=4)
         jsonf.write(jsonString)
           
-csvFilePath = r'demographics.csv'
-jsonFilePath = r'demographics.json'
-csv_to_json(csvFilePath, jsonFilePath)
+def search_json_file(jsonFilePath):
+    # Opening JSON file (CHANGE THIS ON LOCAL PC)
+    f = open(jsonFilePath)
+    
+    # data = JSON object as list
+    data = json.load(f)
+    
+    # Iterating through the json
+    for i in data:
+        print(i['demographic_value'])
+    
+    # Closing file
+    f.close()
+
+#(CHANGE PATH ON LOCAL PC!!)
+csvFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.csv'
+#correctly parsed json file 
+jsonFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.json' 
+
+#method calls:
+#csv_to_json(csvFilePath, jsonFilePath) #only needed to create json once
+search_json_file(jsonFilePath)
