@@ -1,15 +1,27 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<form name="Search" action="" method="post">
-	<select name="search_drop-down">
-		<option value="race/ethnicity">race/ethnicity</option>
-		<option value="gender">gender</option>
-		<option value="age">age</option>
-		<option value="date">date</option>
-	</select>
-	<input id="search_box" type="text" name="search_box">
-	<input type="submit" value="Search">
-</form>
+<!-- reference:  -->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>Search</title>
+	</head>
+	<form action="" class="search-bar">
+		<input type="search" name="search" pattern=".*\S.*" required>
+		<button class="search-btn" type="submit">
+			<span>Search</span>
+		</button>
+	</form>
+
+	<!-- 
+    <form action = "" method = "get">
+		<label for="your_search">Search: </label>
+		<input id="your_search" type="text" name="your_search">
+		<input type="submit" value="OK">
+	</form>-->
+</html>
 {% endblock content %}
