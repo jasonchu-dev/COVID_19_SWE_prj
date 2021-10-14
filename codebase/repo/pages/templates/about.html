@@ -2,7 +2,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>About page</h1>
-<h2>Creators</h2>
-<body>Brayan Montiel, Hongan Zhang, Jason Chu, Mahamadsaad Sheikh, Scott Mesdjian</body>
-{% endblock %}
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>About</title>
+	</head>
+	<h1>About page
+	<h2>Creators: </h2>
+	<body>Brayan Montiel, Hongan Zhang, Jason Chu, Mahamadsaad Sheikh, Scott Mesdjian</body>
+
+</h1>
+</html>
+{% endblock content %}
+
+<!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->
