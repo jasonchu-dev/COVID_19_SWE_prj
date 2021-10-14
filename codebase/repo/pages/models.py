@@ -1,6 +1,8 @@
 from django.db import models
 import os
 import json
+import requests
+
 
 # Create your models here.
 
@@ -41,6 +43,8 @@ def search_json_file(jsonFilePath):
     # Closing file
     f.close()
 
+
+
 #(CHANGE PATH ON LOCAL PC!!)
 csvFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.csv'
 #correctly parsed json file 
@@ -48,4 +52,4 @@ jsonFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180
 
 #method calls:
 #csv_to_json(csvFilePath, jsonFilePath) #only needed to create json once
-search_json_file(jsonFilePath)
+#search_json_file(jsonFilePath)

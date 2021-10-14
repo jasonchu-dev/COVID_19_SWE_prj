@@ -17,6 +17,15 @@ body, input {
 body, .search-bar {
 	display: flex;
 }
+
+h1 {
+	color:  #f1f1f1;
+}
+
+a {
+	color:  #f1f1f1;
+}
+
 body {
 	background: #f1f1f1;
 	height: 100vh;
@@ -154,5 +163,3 @@ body {
 		background: #f1f1f1;
 	}
 }
-
-/* reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ */
