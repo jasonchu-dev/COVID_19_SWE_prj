@@ -1,0 +1,17 @@
+<!-- templates/results.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>Results</title>
+	</head>
+    <body>{{search}}</body>
+</html>
+{% endblock content %}
+
+<!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->
