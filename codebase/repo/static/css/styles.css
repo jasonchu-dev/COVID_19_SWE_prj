@@ -20,15 +20,27 @@ body, .search-bar {
 
 h1 {
 	color:  #f1f1f1;
+	vertical-align: middle;
+}
+
+h2 {
+	color:  #f1f1f1;
+	vertical-align: middle;
+}
+
+h3 {
+	color:  #f1f1f1;
+	vertical-align: middle;
 }
 
 a {
-	color:  #f1f1f1;
+	color:  #7DF9FF;
 }
 
 body {
 	background: #f1f1f1;
 	height: 100vh;
+	vertical-align: middle;
 }
 .search-bar input,
 .search-btn, 
