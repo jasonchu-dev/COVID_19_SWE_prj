@@ -32,6 +32,15 @@
 		<input type="submit" value="OK">
 	</form>-->
 </html>
+
+<script>
+    var e = document.getElementById("ddlView");
+	var optionSelected = e.value;
+	if (typeof (Storage) !== "undefined") {
+		// Store
+		localStorage.setItem("optionSelected", optionSelected);
+	}
+</script>
 {% endblock content %}
 
 <!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->
