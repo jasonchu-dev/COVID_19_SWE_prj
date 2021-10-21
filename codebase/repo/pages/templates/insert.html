@@ -1,0 +1,25 @@
+<!-- templates/insert.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>Insert</title>
+	</head>
+
+	<!--<form action="search" class="search-bar" method = "get">
+		<input type="search" name="search" pattern=".*\S.*" required>
+		<button class="search-btn" type="submit">
+			<span>Search</span>
+		</button>
+	</form>-->
+	<h3>Here are your search results: </h3>
+    <body>{{search}}</body>
+</html>
+{% endblock content %}
+
+<!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->
