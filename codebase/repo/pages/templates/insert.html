@@ -4,30 +4,33 @@
 {% load static %}
 
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
-		<title>Insert</title>
-	</head>
-	<header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a>
-	</header>
-    <div align="center">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+    <title>Insert</title>
+</head>
+
+<header>
+    <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a>
+</header>
+
+<div align="center">
     <h3>Please enter all the data fields to create a new record: </h3>
-    <form align="center" action="" method="get">
+    <form align="center" action="insert" method="get">
+        <label for="demographiccategory">Demographic Category</label><br>
+        <input type="text" id="demographiccategory" name="demographiccategory"><br><br>
         <label for="demographicvalue">Demographic Value</label><br>
         <input type="text" id="demographicvalue" name="demographicvalue"><br><br>
         <label for="administereddate">Administered Date</label><br>
         <input type="text" id="administereddate" name="administereddate"><br><br>
-        <label for="totaldoses">Total Doses</label><br>
-        <input type="text" id="totaldoses" name="totaldoses"><br><br>
-        <label for="totaldoses">Total Doses</label><br>
-        <input type="text" id="totaldoses" name="totaldoses"><br><br>
         <input type="submit" value="Submit">
     </form>
-    </div>
-
+</div>
+<div style="text-align:center">
+    <p>{{insert}} </p>
+</div>
     
+<!-- -->
     <!--cumulative_total_doses,
     pfizer_doses,cumulative_pfizer_doses,
     moderna_doses,cumulative_moderna_doses,
