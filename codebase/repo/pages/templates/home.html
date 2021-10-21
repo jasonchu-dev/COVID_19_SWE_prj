@@ -13,13 +13,22 @@
 	<header>
 		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a>
 	</header>
-
-	<form action="search" class="search-bar" method = "get">
-		<input type="search" name="search" pattern=".*\S.*" required>
-		<button class="search-btn" type="submit">
-			<span>Search</span>
-		</button>
-	</form>
+	
+	<div align="center">
+		Search Vaccination Records by :
+		<p align="left">
+			Race/Ethnicicty: White, Latino, Asian, Black or African American, Native Hawaiian or Other Pacific Islander. <br>
+			Gender: Male, Female, Unknown/undifferentiated <br>
+			ID Number <br>
+			Administered Date : MM/DD/YY <br>
+		</p>
+		<form action="search" class="search-bar" method = "get">
+			<input type="search" name="search" pattern=".*\S.*" required>
+			<button class="search-btn" type="submit">
+				<span>Search</span>
+			</button>
+		</form>
+	</div>
 </html>
 {% endblock content %}
 
