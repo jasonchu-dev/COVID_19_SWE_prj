@@ -19,6 +19,27 @@ class AboutPageView(TemplateView):
 
 class DeletePageView(TemplateView): 
     template_name = 'delete.html'
+class InsertPageView(TemplateView):
+    template_name = 'insert.html'
+
+
+
+def results(request):
+    s1 = request.GET['search']
+    # Opening JSON file (CHANGE THIS ON LOCAL PC)
+    #(CHANGE PATH ON LOCAL PC!!)
+    jsonFilePath = 'pages/demographics.json'
+    input = request.GET['search']
+    #function start
+    s2= ""
+    # Opening JSON file 
+    f = open(jsonFilePath)
+    
+    # data = JSON object as list
+    data = json.load(f)
+    
+    # Iterating through the json
+    s2 = "demographic_category " + "demographic_value " + "administered_date " + "total_doses " + "cumulative_total_doses " + "pfizer_doses " + "cumulative_pfizer_doses " + "moderna_doses " + "cumulative_moderna_doses " + "jj_doses " + "cumulative_jj_doses " + "partially_vaccinated " + "total_partially_vaccinated " + "fully_vaccinated " + "cumulative_fully_vaccinated " + "at_least_one_dose "+ "cumulative_at_least_one_dose\n"
 
 #search method
 def results(request):
