@@ -19,27 +19,9 @@ class AboutPageView(TemplateView):
 
 class DeletePageView(TemplateView): 
     template_name = 'delete.html'
+
 class InsertPageView(TemplateView):
     template_name = 'insert.html'
-
-
-
-def results(request):
-    s1 = request.GET['search']
-    # Opening JSON file (CHANGE THIS ON LOCAL PC)
-    #(CHANGE PATH ON LOCAL PC!!)
-    jsonFilePath = 'pages/demographics.json'
-    input = request.GET['search']
-    #function start
-    s2= ""
-    # Opening JSON file 
-    f = open(jsonFilePath)
-    
-    # data = JSON object as list
-    data = json.load(f)
-    
-    # Iterating through the json
-    s2 = "demographic_category " + "demographic_value " + "administered_date " + "total_doses " + "cumulative_total_doses " + "pfizer_doses " + "cumulative_pfizer_doses " + "moderna_doses " + "cumulative_moderna_doses " + "jj_doses " + "cumulative_jj_doses " + "partially_vaccinated " + "total_partially_vaccinated " + "fully_vaccinated " + "cumulative_fully_vaccinated " + "at_least_one_dose "+ "cumulative_at_least_one_dose\n"
 
 #search method
 def results(request):
@@ -59,7 +41,7 @@ def results(request):
         s2 = "No matching results...pleast try again."
     return render(request,'results.html',{'search':s2})
 
-#delte method
+#delete method
 def delete_record(request):
     input = request.GET['delete'] #retrieves the GET for deleting
     s3= '' #will be our return string
@@ -89,3 +71,11 @@ def delete_record(request):
             s3 = 'Record not found. Please try again.'
     return render(request,'delete.html',{'delete':s3})
 
+#insert method
+def insert_record(request):
+    #input = []
+    #input = request.GET.getlist['insert'] #retrieves the GET for inserting // currently breaks the program
+    #s3= '' #will be our return string
+    #s3 = input[0]# + input[1] + input[2]
+    s3 = 'currently not working'
+    return render(request,'insert.html',{'insert':s3})
