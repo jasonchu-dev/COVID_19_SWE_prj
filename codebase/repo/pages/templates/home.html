@@ -11,6 +11,13 @@
 		<title>Search</title>
 	</head>
 	<form action="search" class="search-bar" method = "get">
+		<select name="search_drop-down" id="ddlView">
+			<option value="Race/Ethnicity">race/ethnicity</option>
+			<option value="Gender">gender</option>
+			<option value="Age Group">age</option>
+			<option value="Date">date</option>
+			<option value="ID">id</option>
+		</select>
 		<input type="search" name="search" pattern=".*\S.*" required>
 		<button class="search-btn" type="submit">
 			<span>Search</span>
