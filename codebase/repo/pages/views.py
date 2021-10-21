@@ -10,6 +10,11 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView): 
     template_name = 'about.html'
 
+class InsertPageView(TemplateView):
+    template_name = 'insert.html'
+
+
+
 def results(request):
     s1 = request.GET['search']
     # Opening JSON file (CHANGE THIS ON LOCAL PC)
