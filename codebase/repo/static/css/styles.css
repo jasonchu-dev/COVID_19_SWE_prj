@@ -44,9 +44,7 @@ h2 {
 
 h3 {
 	color: Black;
-	margin-top:200px;
-  	margin-bottom:5px;
-	text-align: center;
+	margin-top: 20px;
 }
 
 
@@ -62,7 +60,6 @@ div{
 
 p {
 	color: Black;
-	margin-top:20px;
 	padding-left: 0px;
 	padding-right: 0px;
 }
