@@ -8,5 +8,5 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='home'),  
     path('search/', views.results, name='search'),
     path('delete/', DeletePageView.as_view(), name='delete'),
-    path('delete/', views.delete_record, name='delete'),
+    path('delete/delete', views.delete_record, name='delete_results'),
 ]
