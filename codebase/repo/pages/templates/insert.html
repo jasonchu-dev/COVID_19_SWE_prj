@@ -10,6 +10,29 @@
 		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
 		<title>Insert</title>
 	</head>
+    <div align="center">
+    <h3>Please enter all the data fields to create a new record: </h3>
+    <form align="center" action="" method="get">
+        <label for="demographicvalue">Demographic Value</label><br>
+        <input type="text" id="demographicvalue" name="demographicvalue"><br><br>
+        <label for="administereddate">Administered Date</label><br>
+        <input type="text" id="administereddate" name="administereddate"><br><br>
+        <label for="totaldoses">Total Doses</label><br>
+        <input type="text" id="totaldoses" name="totaldoses"><br><br>
+        <label for="totaldoses">Total Doses</label><br>
+        <input type="text" id="totaldoses" name="totaldoses"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+
+    
+    <!--cumulative_total_doses,
+    pfizer_doses,cumulative_pfizer_doses,
+    moderna_doses,cumulative_moderna_doses,
+    jj_doses,cumulative_jj_doses,partially_vaccinated,
+    total_partially_vaccinated,fully_vaccinated,
+    cumulative_fully_vaccinated,at_least_one_dose,
+    cumulative_at_least_one_dose-->
 
 	<!--<form action="search" class="search-bar" method = "get">
 		<input type="search" name="search" pattern=".*\S.*" required>
@@ -17,7 +40,7 @@
 			<span>Search</span>
 		</button>
 	</form>-->
-	<h3>Here are your search results: </h3>
+	
     <body>{{search}}</body>
 </html>
 {% endblock content %}
