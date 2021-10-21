@@ -1,5 +1,4 @@
 <!-- templates/insert.html -->
-{% extends 'base.html' %}
 
 {% block content %}
 {% load static %}
@@ -10,6 +9,9 @@
 		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
 		<title>Insert</title>
 	</head>
+	<header>
+		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a>
+	</header>
     <div align="center">
     <h3>Please enter all the data fields to create a new record: </h3>
     <form align="center" action="" method="get">
