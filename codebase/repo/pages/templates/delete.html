@@ -18,10 +18,28 @@
 
         <div style="text-align:center"> <h1> Welcome to the delete page </h1> <h2> To delete simply enter ID of record you wish to delete </h2>
         </div>
-        <br/><br/>
+      
         <h3> Enter ID to delete: </h3>
             <form action="delete" class="search-bar" method = "get">
                 <input type="delete" name="delete" pattern=".*\S.*" required>
+                <select name="Age">
+                    <optgroup label="Age">
+                        <option>18-49</option>
+                        <option>50-54</option>
+                        <option>65+</option>
+                    </optgroup>
+    
+                    <optgroup label="Race">
+                        <option>Asian</option>
+                        <option>White</option>
+                        <option>Lation</option>
+                    </optgroup>
+
+                    <optgroup label="None">
+                        <option>None</option>
+                    </optgroup>
+                     
+                </select><br/><br/>	
                 <button class="search-btn" type="submit">
                     <span>Delete</span>
                 </button>
