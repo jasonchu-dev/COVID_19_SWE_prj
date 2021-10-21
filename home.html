@@ -1,0 +1,47 @@
+﻿<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>Search</title>
+	</head>
+	<form action="search" class="search-bar" method="get">
+		<select name="search_drop-down" id="ddlView">
+			<option value="Race/Ethnicity">race/ethnicity</option>
+			<option value="Gender">gender</option>
+			<option value="Age Group">age</option>
+			<option value="Date">date</option>
+			<option value="ID">id</option>
+		</select>
+		<input type="search" name="search" pattern=".*\S.*" required>
+		<button class="search-btn" type="submit">
+			<span>Search</span>
+		</button>
+	</form>
+
+	
+	<!-- 
+    <form action = "" method = "get">
+		<label for="your_search">Search: </label>
+		<input id="your_search" type="text" name="your_search">
+		<input type="submit" value="OK">
+	</form>-->
+</html>
+
+
+<script>
+    var e = document.getElementById("ddlView");
+	var optionSelected = e.value;
+	if (typeof (Storage) !== "undefined") {
+		// Store
+		localStorage.setItem("optionSelected", optionSelected);
+	}
+</script>
+{% endblock content %}
+
+<!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->

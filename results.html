@@ -1,0 +1,62 @@
+﻿<!-- templates/results.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+		<title>Results</title>
+	</head>
+
+	<!--<form action="search" class="search-bar" method = "get">
+		<input type="search" name="search" pattern=".*\S.*" required>
+		<button class="search-btn" type="submit">
+			<span>Search</span>
+		</button>
+	</form>-->
+
+	<!-- <h3>Here are your search results: </h3> -->
+    <!-- <body>{{search}}</body> -->
+	<body>
+	<h1>space</h1>
+	<table id='demographics_table'>
+	</table>
+	</body>
+</html>
+
+<script>
+	urlarr = window.location.href.split('/', 3)
+	url = urlarr[0] + '//' + urlarr[2]
+		$(document).ready(function(){
+		$.getJSON(url + "/static/demographics.json", function(info){
+			var data = '';
+			$.each(info, function(elem){
+				data += '<tr>';
+				$.each(info[elem], function(key, value){
+					data += '<td>' + value + '</td>';
+				});
+				data += '</tr>';
+			});
+			document.getElementById('demographics_table').innerHTML = data
+		});
+		});
+	
+	//-----------------
+    // Check browser support
+    if (typeof (Storage) !== "undefined") {
+        // Retrieve
+		document.getElementById("result").innerHTML = localStorage.getItem("optionSelected");
+		// we can set this part to a variable instead to work with the formatting function to sort
+    } else {
+        document.getElementById("result").innerHTML = "Browser does not support Web Storage.";
+    }
+	//source: https://www.csestack.org/javascript-localstorage-pass-data-web-page/
+</script>
+
+
+{% endblock content %}
+
+<!-- reference for landing html/css: https://codepen.io/jkantner/pen/eYmvvqQ -->
