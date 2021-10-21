@@ -13,14 +13,13 @@
 	<header>
 		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a>
 	</header>
-    
+
     <body>
 
-        <div style="text-align:center"> <h1><br> Welcome to the delete page </h1><br/> To delete simply enter ID of record you wish to delete.</h2>
-            
+        <div style="text-align:center"> <h1> Welcome to the delete page </h1> <h2> To delete simply enter ID of record you wish to delete </h2>
         </div>
-    
-        <h2> Enter ID to delete: </h2>
+        <br/><br/>
+        <h3> Enter ID to delete: </h3>
             <form action="delete" class="search-bar" method = "get">
                 <input type="delete" name="delete" pattern=".*\S.*" required>
                 <button class="search-btn" type="submit">
