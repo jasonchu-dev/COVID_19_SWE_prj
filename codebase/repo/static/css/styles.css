@@ -4,6 +4,8 @@
 	margin: 0;
 	padding: 0;
 }
+
+
 :root {
 	font-size: calc(16px + (24 - 16)*(100vw - 320px)/(1920 - 320));
 }
@@ -18,30 +20,49 @@ body, .search-bar {
 	display: flex;
 }
 
-h1 {
-	color:  #f1f1f1;
-	vertical-align: middle;
+.center{
+	color: black;
+    font-size: 39px;
 }
 
-h2 {
-	color:  #f1f1f1;
-	vertical-align: middle;
+a { 
+    color: blue;
+}
+
+h1 {
+	color: Black;
+	width:500px;
+    margin: 0 auto;
+	text-align: left;
 }
 
 h3 {
-	color:  #f1f1f1;
-	vertical-align: middle;
+	color: Black;
+	margin-top:200px;
+  	margin-bottom:20px;
+	text-align: center;
 }
 
-a {
-	color:  #7DF9FF;
-}
 
 body {
 	background: #f1f1f1;
 	height: 100vh;
-	vertical-align: middle;
 }
+
+div{
+	color: Black;
+	margin-top:200px;
+  	margin-bottom:20px;
+}
+
+p {
+	color: Black;
+	margin-top:200px;
+  	margin-bottom:20px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .search-bar input,
 .search-btn, 
 .search-btn:before, 
@@ -156,7 +177,7 @@ body {
 	transform: translateY(1px);
 }
 
-@media screen and (prefers-color-scheme: dark) {
+/*@media screen and (prefers-color-scheme: dark) {
 	body, input {
 		color: #f1f1f1;
 	}
@@ -174,4 +195,5 @@ body {
 	.search-btn {
 		background: #f1f1f1;
 	}
-}
+} 
+*/

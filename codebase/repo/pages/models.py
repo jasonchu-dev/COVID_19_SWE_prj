@@ -38,7 +38,7 @@ def search_json_file(jsonFilePath):
     
     # Iterating through the json
     for i in data:
-        print(i['demographic_value'])
+        print(i['ID'])
     
     # Closing file
     f.close()

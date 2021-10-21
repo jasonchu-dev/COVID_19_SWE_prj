@@ -1,5 +1,4 @@
 <!-- templates/results.html -->
-{% extends 'base.html' %}
 
 {% block content %}
 {% load static %}
@@ -11,14 +10,17 @@
 		<title>Results</title>
 	</head>
 
-	<!--<form action="search" class="search-bar" method = "get">
-		<input type="search" name="search" pattern=".*\S.*" required>
-		<button class="search-btn" type="submit">
-			<span>Search</span>
-		</button>
-	</form>-->
-	<h3>Here are your search results: </h3>
-    <body>{{search}}</body>
+	<header>
+		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a>
+	</header>
+
+    <body>
+		<h2>Here are your results:</h2>
+		<p style="text-align:center">ID | Category | Value | Administered Date | Total Doses | Cumulative Doses | Pfizer Doses | Cumulative Pfizer Doses | Moderna Doses | Cumulative Moderna Doses | JJ Doses | Cumulative JJ Doses | Partially Vaccinated | Total Partially Vaccinated | Fully Vaccinated | Cumulative Fully Vaccinated | At Least One Dose | Cumulative At Least Once Dose
+		<br>
+		{{search}}
+		</p>
+	</body>
 </html>
 {% endblock content %}
 
