@@ -44,9 +44,9 @@ def search_json_file(jsonFilePath):
     f.close()
 
 #(CHANGE PATH ON LOCAL PC!!)
-csvFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.csv'
+csvFilePath = 'pages/demographics.csv'
 #correctly parsed json file 
-jsonFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.json' 
+jsonFilePath = 'pages/demographics.json' 
 
 #method calls:
 #csv_to_json(csvFilePath, jsonFilePath) #only needed to create json once
