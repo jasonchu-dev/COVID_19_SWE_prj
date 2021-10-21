@@ -43,6 +43,16 @@
 			document.getElementById('demographics_table').innerHTML = data
 		});
 	});
+	//-----------------
+    // Check browser support
+    if (typeof (Storage) !== "undefined") {
+        // Retrieve
+		document.getElementById("result").innerHTML = localStorage.getItem("optionSelected");
+		// we can set this part to a variable instead to work with the formatting function to sort
+    } else {
+        document.getElementById("result").innerHTML = "Browser does not support Web Storage.";
+    }
+	//source: https://www.csestack.org/javascript-localstorage-pass-data-web-page/
 </script>
 
 {% endblock content %}
