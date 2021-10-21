@@ -1,4 +1,4 @@
-<!-- templates/results.html -->
+﻿<!-- templates/results.html -->
 {% extends 'base.html' %}
 
 {% block content %}
@@ -42,7 +42,8 @@
 			});
 			document.getElementById('demographics_table').innerHTML = data
 		});
-	});
+		});
+	
 	//-----------------
     // Check browser support
     if (typeof (Storage) !== "undefined") {
@@ -54,6 +55,7 @@
     }
 	//source: https://www.csestack.org/javascript-localstorage-pass-data-web-page/
 </script>
+
 
 {% endblock content %}
 
