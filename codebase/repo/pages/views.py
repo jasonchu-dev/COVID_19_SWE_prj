@@ -79,3 +79,21 @@ def insert_record(request):
     #s3 = input[0]# + input[1] + input[2]
     s3 = 'currently not working'
     return render(request,'insert.html',{'insert':s3})
+
+#modify method
+def modify_record(request):
+    inputID = request.GET['recordID'] #retrieves ID
+    inputCat = request.GET['category'] #retrieves Demographic Category
+    inputValue = request.GET['value'] #retrieves Demographic Value
+    inputDate = request.GET['date']  #retrieves Date
+    s4= '' #will be our return string
+    for i in data:
+        if inputID == str(i['ID']) :
+            i['demographic_category'] = inputCat
+            i['demographic_value']  = inputValue
+            i['administered_date'] = inputDate
+            s4 = 'Record has been successfully modified. Thank you.'
+            break
+        else:
+            s4 = 'Sorry, record ' + inputID + ' not found. Try again.'
+    return render(request,'insert.html',{'modify':s4})

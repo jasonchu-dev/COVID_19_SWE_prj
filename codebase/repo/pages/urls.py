@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete/delete', views.delete_record, name='delete_results'),
     path('insert/', InsertPageView.as_view(), name='insert'), 
     path('insert/insert', views.insert_record, name='insert_results'), #
+    path('insert/modify', views.modify_record, name='modify_results'), #
 ]

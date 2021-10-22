@@ -4,17 +4,48 @@
 {% load static %}
 
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
-    <title>Insert</title>
-</head>
+    <head>
+        <!--LINK JQUERY-->
+        <script type="text/javascript" src="jquery-3.3.1.js"></script>
+        <!--Personal JS-->
+        <script type="text/javascript">
+            function addChild() {
+            document.getElementById('form1').style.display = 'block';
+            }
+        </script>
+    </head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+        <title>Insert</title>
+    </head>
 
 <header>
     <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a>
 </header>
 
 <div align="center">
+    <button type="button" value ="Add Child" onclick="addChild();">Click to Edit Records<br>
+        <form align="left" id= "form1" action="modify" method="get">
+            <label for="recordID"></label><br>
+            Enter ID: <input type="text" id="recordID" name="recordID"><br><br>
+            <label for="category"></label><br>
+            Enter Demographic Category: <input type="text" id="category" name="category"><br><br>
+            <label for="value"></label><br>
+            Enter Demographic Value:<input type="text" id="value" name="value"><br><br>
+            <label for="date"></label><br>
+            Enter Date (MM/DD/YY):<input type="text" id="date" name="date"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </button>
+
+<!-- <div align="center">
+    <button type="button" value ="Add Child" onclick="addChild();">
+    <form id="form1" method="get">Click to Edit Records
+    </form>
+    
+    
+
     <h3>Please enter all the data fields to create a new record: </h3>
     <form align="center" action="insert" method="get">
         <label for="demographiccategory">Demographic Category</label><br>
@@ -25,9 +56,11 @@
         <input type="text" id="administereddate" name="administereddate"><br><br>
         <input type="submit" value="Submit">
     </form>
+    
 </div>
-<div style="text-align:center">
+-->
     <p>{{insert}} </p>
+    <p>{{modify}} </p>
 </div>
     
 <!-- -->
@@ -44,9 +77,9 @@
 		<button class="search-btn" type="submit">
 			<span>Search</span>
 		</button>
-	</form>-->
+	</form>
 	
-    <body>{{search}}</body>
+    <body>{{search}}</body>-->
 </html>
 {% endblock content %}
 
