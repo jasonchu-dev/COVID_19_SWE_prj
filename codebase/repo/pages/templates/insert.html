@@ -1,4 +1,4 @@
-<!-- templates/insert.html -->
+﻿<!-- templates/insert.html -->
 
 {% block content %}
 {% load static %}
@@ -11,6 +11,10 @@
         <script type="text/javascript">
             function addChild() {
             document.getElementById('form1').style.display = 'block';
+            }
+
+            function addChild2() {
+                document.getElementById('form2').style.display = 'block';
             }
         </script>
     </head>
@@ -25,8 +29,9 @@
 </header>
 
 <div align="center">
-    <button type="button" value ="Add Child" onclick="addChild();">Click to Edit Records<br>
-        <form align="left" id= "form1" action="modify" method="get">
+    <button type="button" value="Add Child" onclick="addChild();">
+        Click to Edit Records<br>
+        <form align="left" id="form1" action="modify" method="get">
             <label for="recordID"></label><br>
             Enter ID: <input type="text" id="recordID" name="recordID"><br><br>
             <label for="category"></label><br>
@@ -35,30 +40,43 @@
             Enter Demographic Value:<input type="text" id="value" name="value"><br><br>
             <label for="date"></label><br>
             Enter Date (MM/DD/YY):<input type="text" id="date" name="date"><br><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Modify">
+        </form>
+    </button>
+    <button type="button" value="Add Child 2" onclick="addChild2();">
+        Click to Add Records<br>
+        <form align="left" id="form2" action="insert" method="get">
+            <label for="category"></label><br>
+            Enter Demographic Category: <input type="text" id="category" name="category"><br><br>
+            <label for="value"></label><br>
+            Enter Demographic Value:<input type="text" id="value" name="value"><br><br>
+            <label for="date"></label><br>
+            Enter Date (MM/DD/YY):<input type="text" id="date" name="date"><br><br>
+            <input type="submit" value="Insert">
         </form>
     </button>
 
-<!-- <div align="center">
-    <button type="button" value ="Add Child" onclick="addChild();">
-    <form id="form1" method="get">Click to Edit Records
-    </form>
-    
-    
 
-    <h3>Please enter all the data fields to create a new record: </h3>
-    <form align="center" action="insert" method="get">
-        <label for="demographiccategory">Demographic Category</label><br>
-        <input type="text" id="demographiccategory" name="demographiccategory"><br><br>
-        <label for="demographicvalue">Demographic Value</label><br>
-        <input type="text" id="demographicvalue" name="demographicvalue"><br><br>
-        <label for="administereddate">Administered Date</label><br>
-        <input type="text" id="administereddate" name="administereddate"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-    
-</div>
--->
+    <!-- <div align="center">
+        <button type="button" value ="Add Child" onclick="addChild();">
+        <form id="form1" method="get">Click to Edit Records
+        </form>
+
+
+
+        <h3>Please enter all the data fields to create a new record: </h3>
+        <form align="center" action="insert" method="get">
+            <label for="demographiccategory">Demographic Category</label><br>
+            <input type="text" id="demographiccategory" name="demographiccategory"><br><br>
+            <label for="demographicvalue">Demographic Value</label><br>
+            <input type="text" id="demographicvalue" name="demographicvalue"><br><br>
+            <label for="administereddate">Administered Date</label><br>
+            <input type="text" id="administereddate" name="administereddate"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+    -->
     <p>{{insert}} </p>
     <p>{{modify}} </p>
 </div>
