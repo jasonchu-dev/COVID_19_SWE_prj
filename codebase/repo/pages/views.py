@@ -47,7 +47,7 @@ def delete_record(request):
     s3= '' #will be our return string
     for i in data:
         if input == str(i['ID']) : #this works in terms of getting it to 'delete' everytime surver runs 
-            i['ID'] = 0         #will not show up in GUI anymore...back end still needs to fix to update json
+            i['ID'] = None        #will not show up in GUI anymore...back end still needs to fix to update json
             i['demographic_category'] = 0
             i['demographic_value']  = 0
             i['administered_date'] = 0
@@ -78,8 +78,11 @@ def insert_record(request):
     inputValue = request.GET['value'] #retrieves Demographic Value
     inputDate = request.GET['date']  #retrieves Date
     s3 = '' #return string
+    maxIDNum = 0
     for i in data:
-        maxIDNum = i['ID']
+        if i['ID'] > maxIDNum:
+           maxIDNum = i['ID']
+           
     #bam = {"ID" : 3, "demographic_category": "Age Group"}
     newRecord = {"ID": maxIDNum + 1, 
            "demographic_category": inputCat,
@@ -122,3 +125,12 @@ def modify_record(request):
         else:
             s4 = 'Sorry, record ' + inputID + ' not found. Try again.'
     return render(request,'insert.html',{'modify':s4})
+
+def backup_record(request):
+    #input = request.GET['backup']
+    jsonString = json.dumps(data)
+    jsonFile = open("pages/demographics.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
+    s5 = 'Record has been successfully backed up. Thank you.'
+    return render(request,'home.html',{'backup':s5})
