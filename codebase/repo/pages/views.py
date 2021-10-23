@@ -72,12 +72,37 @@ def delete_record(request):
     return render(request,'delete.html',{'delete':s3})
 
 #insert method
+
 def insert_record(request):
-    #input = []
-    #input = request.GET.getlist['insert'] #retrieves the GET for inserting // currently breaks the program
-    #s3= '' #will be our return string
-    #s3 = input[0]# + input[1] + input[2]
-    s3 = 'currently not working'
+    inputCat = request.GET['category'] #retrieves Demographic Category
+    inputValue = request.GET['value'] #retrieves Demographic Value
+    inputDate = request.GET['date']  #retrieves Date
+    s3 = '' #return string
+    for i in data:
+        maxIDNum = i['ID']
+    #bam = {"ID" : 3, "demographic_category": "Age Group"}
+    newRecord = {"ID": maxIDNum + 1, 
+           "demographic_category": inputCat,
+           "demographic_value": inputValue,
+           "administered_date": inputDate,
+           "total_doses": 0,
+           "cumulative_total_doses": 0,
+           "pfizer_doses": 0,
+           "cumulative_pfizer_doses": 0,
+           "moderna_doses": 0,
+           "cumulative_moderna_doses": 0,
+           "jj_doses": 0,
+           "cumulative_jj_doses": 0,
+           "partially_vaccinated": 0,
+           "total_partially_vaccinated": 0,
+           "fully_vaccinated": 0,
+           "cumulative_fully_vaccinated": 0,
+           "at_least_one_dose": 0,
+           "cumulative_at_least_one_dose": 0}
+    
+    data.append(newRecord)
+    #jsonArray.append((words[0], words[1:]))
+    s3 = 'Record has been successfully added. Thank you.'
     return render(request,'insert.html',{'insert':s3})
 
 #modify method
