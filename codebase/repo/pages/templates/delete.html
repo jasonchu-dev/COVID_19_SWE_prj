@@ -8,15 +8,22 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
 		<title>Delete</title>
+        <style>
+        
+            h1{font-size:20px;color:blue}
+            p{font-size:20px;color:rgb(157, 157, 240)}
+        </style>
+        <link rel="stylesheet" href= "./all.css">
 	</head>
 	
+
     <header>
         <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
     </header>
-    
+   
     <div align="center"> 
         <h2>Delete Records</h2>
-        <br> To delete simply enter ID of record you wish to delete.
+        <h1><br> To delete simply enter ID of record you wish to delete</h1>.
         <p>Enter ID to delete: </p>
         <form action="delete" class="search-bar" method = "get">
             <input type="delete" name="delete" pattern=".*\S.*" required>
