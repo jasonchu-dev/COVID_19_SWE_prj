@@ -23,6 +23,9 @@ class DeletePageView(TemplateView):
 class InsertPageView(TemplateView):
     template_name = 'insert.html'
 
+class AnalyticsPageView(TemplateView):
+    template_name = 'analytics.html'
+
 #search method
 def results(request):
     input = request.GET['search'] #retrieves the GET for search
@@ -47,7 +50,7 @@ def delete_record(request):
     s3= '' #will be our return string
     for i in data:
         if input == str(i['ID']) : #this works in terms of getting it to 'delete' everytime surver runs 
-            i['ID'] = 0         #will not show up in GUI anymore...back end still needs to fix to update json
+            i['ID'] = None        #will not show up in GUI anymore...back end still needs to fix to update json
             i['demographic_category'] = 0
             i['demographic_value']  = 0
             i['administered_date'] = 0
@@ -72,10 +75,65 @@ def delete_record(request):
     return render(request,'delete.html',{'delete':s3})
 
 #insert method
+
 def insert_record(request):
-    #input = []
-    #input = request.GET.getlist['insert'] #retrieves the GET for inserting // currently breaks the program
-    #s3= '' #will be our return string
-    #s3 = input[0]# + input[1] + input[2]
-    s3 = 'currently not working'
+    inputCat = request.GET['category'] #retrieves Demographic Category
+    inputValue = request.GET['value'] #retrieves Demographic Value
+    inputDate = request.GET['date']  #retrieves Date
+    s3 = '' #return string
+    maxIDNum = 0
+    for i in data:
+        if i['ID'] > maxIDNum:
+           maxIDNum = i['ID']
+           
+    #bam = {"ID" : 3, "demographic_category": "Age Group"}
+    newRecord = {"ID": maxIDNum + 1, 
+           "demographic_category": inputCat,
+           "demographic_value": inputValue,
+           "administered_date": inputDate,
+           "total_doses": 0,
+           "cumulative_total_doses": 0,
+           "pfizer_doses": 0,
+           "cumulative_pfizer_doses": 0,
+           "moderna_doses": 0,
+           "cumulative_moderna_doses": 0,
+           "jj_doses": 0,
+           "cumulative_jj_doses": 0,
+           "partially_vaccinated": 0,
+           "total_partially_vaccinated": 0,
+           "fully_vaccinated": 0,
+           "cumulative_fully_vaccinated": 0,
+           "at_least_one_dose": 0,
+           "cumulative_at_least_one_dose": 0}
+    
+    data.append(newRecord)
+    #jsonArray.append((words[0], words[1:]))
+    s3 = 'Record has been successfully added. Thank you.'
     return render(request,'insert.html',{'insert':s3})
+
+#modify method
+def modify_record(request):
+    inputID = request.GET['recordID'] #retrieves ID
+    inputCat = request.GET['category'] #retrieves Demographic Category
+    inputValue = request.GET['value'] #retrieves Demographic Value
+    inputDate = request.GET['date']  #retrieves Date
+    s4= '' #will be our return string
+    for i in data:
+        if inputID == str(i['ID']) :
+            i['demographic_category'] = inputCat
+            i['demographic_value']  = inputValue
+            i['administered_date'] = inputDate
+            s4 = 'Record has been successfully modified. Thank you.'
+            break
+        else:
+            s4 = 'Sorry, record ' + inputID + ' not found. Try again.'
+    return render(request,'insert.html',{'modify':s4})
+
+def backup_record(request):
+    #input = request.GET['backup']
+    jsonString = json.dumps(data)
+    jsonFile = open("pages/demographics.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
+    s5 = 'Record has been successfully backed up. Thank you.'
+    return render(request,'home.html',{'backup':s5})

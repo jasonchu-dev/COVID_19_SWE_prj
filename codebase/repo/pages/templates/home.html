@@ -1,4 +1,4 @@
-<!-- templates/home.html -->
+﻿<!-- templates/home.html -->
 {% load static %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 	</head>
 	
 	<header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a>
+		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
 	</header>
 	
 	<div align="center">
@@ -20,18 +20,24 @@
 		<h3>Acceptable entries:</h3> <br>
 		<p align="left">
 			Race/Ethnicicty: 'White', 'Latino', 'Asian', 'Black or African American', <br>
-							'Native Hawaiian or Other Pacific Islander', 'Other Race' <br>
+			'Native Hawaiian or Other Pacific Islander', 'Other Race' <br>
 			Gender: Male, Female, Unknown/undifferentiated <br>
 			Age Group: '18-49', '50-64', '65+', or 'Unknown Agegroup' <br>
 			ID Number: 1-6555 <br>
 			Administered Date : MM/DD/YY <br>
 		</p>
-		<form action="search" class="search-bar" method = "get">
+		<form action="search" class="search-bar" method="get">
 			<input type="search" name="search" pattern=".*\S.*" required>
 			<button class="search-btn" type="submit">
 				<span>Search</span>
 			</button>
 		</form>
+		<button type="button" value="Backup">
+			<form align="left" id="" action="backup" method="get">
+				<input type="submit" name="backup" value="Backup">
+			</form>
+		</button>
+		<p>{{backup}} </p>
 	</div>
 </html>
 {% endblock content %}

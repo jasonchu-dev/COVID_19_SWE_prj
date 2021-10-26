@@ -64,6 +64,14 @@ p {
 	padding-right: 0px;
 }
 
+#form1 {
+	display: none;
+  }
+
+#form2 {
+	display: none;
+}
+
 .search-bar input,
 .search-btn, 
 .search-btn:before, 

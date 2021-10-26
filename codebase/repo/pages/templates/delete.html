@@ -1,4 +1,4 @@
-<!-- templates/delete.html -->
+﻿<!-- templates/delete.html -->
 {% load static %}
 
 {% block content %}
@@ -16,10 +16,11 @@
         <link rel="stylesheet" href= "./all.css">
 	</head>
 	
-	<header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a>
-	</header>
-        
+
+    <header>
+        <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
+    </header>
+   
     <div align="center"> 
         <h2>Delete Records</h2>
         <h1><br> To delete simply enter ID of record you wish to delete</h1>.
