@@ -1,7 +1,7 @@
 # pages/urls.py
 from django.urls import path
 from . import views
-from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView# new
+from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView # new
 
 urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
@@ -10,7 +10,8 @@ urlpatterns = [
     path('delete/', DeletePageView.as_view(), name='delete'),
     path('delete/delete', views.delete_record, name='delete_results'),
     path('insert/', InsertPageView.as_view(), name='insert'), 
-    path('insert/insert', views.insert_record, name='insert_results'), #
-    path('insert/modify', views.modify_record, name='modify_results'), #
-    path('backup/', views.backup_record, name='backup'), #
+    path('insert/insert', views.insert_record, name='insert_results'), 
+    path('insert/modify', views.modify_record, name='modify_results'), 
+    path('backup/', views.backup_record, name='backup'), 
+    path('analytics/', AnalyticsPageView.as_view(), name='analytics'), 
 ]

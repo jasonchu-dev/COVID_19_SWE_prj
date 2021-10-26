@@ -23,6 +23,9 @@ class DeletePageView(TemplateView):
 class InsertPageView(TemplateView):
     template_name = 'insert.html'
 
+class AnalyticsPageView(TemplateView):
+    template_name = 'analytics.html'
+
 #search method
 def results(request):
     input = request.GET['search'] #retrieves the GET for search
