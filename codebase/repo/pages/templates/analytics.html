@@ -2,16 +2,6 @@
 
 {% block content %}
 <html>
-    <head>
-        <!--LINK JQUERY-->
-        <script type="text/javascript" src="jquery-3.3.1.js"></script>
-        <!--Personal JS-->
-        <script type="text/javascript">
-            function produceGraph1() {
-            /*document.getElementById('form1').style.display = 'block';*/
-            }
-        </script>
-    </head>
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
@@ -24,10 +14,24 @@
 	<div align="center">
 		<h1>Analytics page</h1>
 
-		<button type="button" value="Produce Graph 1" onclick="produceGraph1();">
-        Click to View Graph 1<br>
-        <!--graph info here-->
+		<button type="button" onclick="myFunction()" value="Graph">
+			<form align="left" id="" action="graph" method="get">
+				<input type="submit" name="graph" value="Graph">
+			</form>
 		</button>
+
+		<img src="{% static "media/MvFchart.png" %}" id="Piechart">
+
+		<script>
+		function myFunction() {
+  			var x = document.getElementById("Piechart");
+  			if (x.style.display === "none") {
+    		x.style.display = "block";
+  			} else {
+    			x.style.display = "none";
+  			}
+		}
+		</script>
 	</div>
 </html>
 {% endblock content %}

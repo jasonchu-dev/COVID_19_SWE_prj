@@ -1,8 +1,11 @@
 # pages/views.py
 from django.views.generic import TemplateView
 from django.shortcuts import render
-import requests
 import json
+from .models import get_graph, get_plot
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 
 #Load json into array data
 jsonFilePath = 'pages/demographics.json'
@@ -137,3 +140,28 @@ def backup_record(request):
     jsonFile.close()
     s5 = 'Record has been successfully backed up. Thank you.'
     return render(request,'home.html',{'backup':s5})
+
+
+def chart_view(request):
+    #input = request.GET['graph']
+    countMale = 0
+    countFemale = 0
+    for i in data:
+        if 'Male' == i['demographic_value'] :
+            countMale += i['total_doses']
+        elif 'Female' == i['demographic_value'] :
+            countFemale+= i['total_doses']
+    labels = 'Male', 'Female',
+    sizes = [countMale, countFemale]
+    #explode = (0, 0.0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    labels = 'Male', 'Female'
+    sizes = [countMale, countFemale]
+    explode = (0,0)
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('./static/media/MvFchart.png',dpi=100)
+    #chart = get_plot(x,y)
+    return render(request, 'analytics.html')
