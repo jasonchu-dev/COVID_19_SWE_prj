@@ -137,3 +137,55 @@ def backup_record(request):
     jsonFile.close()
     s5 = 'Record has been successfully backed up. Thank you.'
     return render(request,'home.html',{'backup':s5})
+
+def race_vaccine_analytics(request):
+    white_jj = 0
+    white_moderna = 0
+    white_pfizer = 0
+
+    latino_jj = 0
+    latino_moderna = 0
+    latino_pfizer = 0
+
+    asian_jj = 0
+    asian_moderna = 0
+    asian_pfizer = 0
+
+    black_jj = 0
+    black_moderna = 0
+    black_pfizer = 0
+
+    for i in data:
+        if i['demographic_value'] == 'White':
+            white_jj += i['jj_doses']
+            white_moderna += i['moderna_doses']
+            white_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Latino':
+            latino_jj += i['jj_doses']
+            latino_moderna += i['moderna_doses']
+            latino_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Asian':
+            asian_jj += i['jj_doses']
+            asian_moderna += i['moderna_doses']
+            asian_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Black or African American':
+            black_jj += i['jj_doses']
+            black_moderna += i['moderna_doses']
+            black_pfizer += i['pfizer_doses'] 
+
+    s6 = 'Chart is made'
+    return render(request, 'analytics.html', {
+        'race':s6,
+        'white_jj':white_jj,
+        'white_moderna':white_moderna,
+        'white_pfizer':white_pfizer,
+        'latino_jj':latino_jj,
+        'latino_moderna':latino_moderna,
+        'latino_pfizer':latino_pfizer,
+        'asian_jj':asian_jj,
+        'asian_moderna':asian_moderna,
+        'asian_pfizer':asian_pfizer,
+        'black_jj':black_jj,
+        'black_moderna':black_moderna,
+        'black_pfizer':black_pfizer
+        })

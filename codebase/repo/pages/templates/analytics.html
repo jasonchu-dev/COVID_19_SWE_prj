@@ -6,10 +6,31 @@
         <!--LINK JQUERY-->
         <script type="text/javascript" src="jquery-3.3.1.js"></script>
         <!--Personal JS-->
-        <script type="text/javascript">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
             function produceGraph1() {
-            /*document.getElementById('form1').style.display = 'block';*/
-            }
+				var ctx = document.getElementById("mychart").getContext("2d");
+				var data = {
+					labels: ["White", "Latino", "Asian", "Black"],
+					datasets: [
+					{
+						label: "J&J",
+						fillColor: "blue",
+						data: ['white_jj', 'latino_jj', 'asian_jj', 'black_jj']
+					},
+					{
+						label: "Moderna",
+						fillColor: "red",
+						data: ['white_moderna', 'latino_moderna', 'asian_moderna', 'black_moderna']
+					},
+					{
+						label: "Pfizer",
+						fillColor: "green",
+						data: ['white_pfizer', 'latino_pfizer', 'asian_pfizer', 'black_pfizer']
+					}
+				]
+            };
+			var myBarChart = new Chart(ctx).Bar(data, { barValueSpacing: 20 });
+		}	
         </script>
     </head>
 	<head>
@@ -24,10 +45,12 @@
 	<div align="center">
 		<h1>Analytics page</h1>
 
-		<button type="button" value="Produce Graph 1" onclick="produceGraph1();">
-        Click to View Graph 1<br>
-        <!--graph info here-->
+		<button type="button" value="Most/least popular vaccine by race/ethnicity" onclick="produceGraph1();">
+			<form align="left" id="mychart" action="race" method="get">
+				<input type="submit" name="race" value="Most/least popular vaccine by race/ethnicity">
+			</form>
 		</button>
+        <!--graph info here-->
 	</div>
 </html>
 {% endblock content %}
