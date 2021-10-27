@@ -1,33 +1,67 @@
-{% load static %}
+﻿{% load static %}
 
 {% block content %}
 <html>
-    <head>
-        <!--LINK JQUERY-->
-        <script type="text/javascript" src="jquery-3.3.1.js"></script>
-        <!--Personal JS-->
-        <script type="text/javascript">
-            function produceGraph1() {
-            /*document.getElementById('form1').style.display = 'block';*/
-            }
-        </script>
-    </head>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
-		<title>Analytics</title>
-	</head>
-	
-	<header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
-	</header>
-	<div align="center">
-		<h1>Analytics page</h1>
+<head>
+    <!--LINK JQUERY-->
+    <!--<script type="text/javascript" src="jquery-3.3.1.js"></script>-->
+    <!--Personal JS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+    <title>Analytics</title>
+</head>
 
-		<button type="button" value="Produce Graph 1" onclick="produceGraph1();">
-        Click to View Graph 1<br>
-        <!--graph info here-->
-		</button>
-	</div>
+<header>
+    <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
+</header>
+<div align="center">
+    <h1>Analytics page</h1>
+</div>
+
+<div>
+    <canvas id="vaccinationLineChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById('vaccinationLineChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: '# of Vaccinations',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
 </html>
 {% endblock content %}
