@@ -1,94 +1,80 @@
-{% load static %}
-
-{% block content %}
+{% load static %} {% block content %}
 <html>
-    <head>
-        <!--LINK JQUERY-->
-        <script type="text/javascript" src="jquery-3.3.1.js"></script>
-        <!--Personal JS-->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
-            function produceGraph1() {
-				var ctx = document.getElementById("mychart").getContext("2d");
-				var data = {
-					labels: ["White", "Latino", "Asian", "Black"],
-					datasets: [
-					{
-						label: "J&J",
-						fillColor: "blue",
-						data: ['white_jj', 'latino_jj', 'asian_jj', 'black_jj']
-					},
-					{
-						label: "Moderna",
-						fillColor: "red",
-						data: ['white_moderna', 'latino_moderna', 'asian_moderna', 'black_moderna']
-					},
-					{
-						label: "Pfizer",
-						fillColor: "green",
-						data: ['white_pfizer', 'latino_pfizer', 'asian_pfizer', 'black_pfizer']
-					}
-				]
-            };
-			var myBarChart = new Chart(ctx).Bar(data, { barValueSpacing: 20 });
-		}	
-        </script>
-		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
-		const ctx = document.getElementById('myChart').getContext('2d');
-		const myChart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-				datasets: [{
-					label: '# of Votes',
-					data: [12, 19, 3, 5, 2, 3],
-					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
-					],
-					borderColor: [
-						'rgba(255, 99, 132, 1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)'
-					],
-					borderWidth: 1
-				}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true
-					}
-				}
-			}
-		});
-		</script> -->
-		<canvas id="mychart" width="400" height="400"></canvas>
-    </head>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
-		<title>Analytics</title>
-	</head>
-	
-	<header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
-	</header>
-	<div align="center">
-		<h1>Analytics page</h1>
+  <head>
+    <!--LINK JQUERY-->
+    <!-- <script type="text/javascript" src="jquery-3.3.1.js"></script> -->
+    <!--Personal JS-->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+    ></script>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      tpye="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <title>Analytics</title>
+  </head>
 
-		<button type="button" value="Most/least popular vaccine by race/ethnicity" onclick="produceGraph1();">
-			<form align="left" id="mychart" action="race" method="get">
-				<input type="submit" name="race" value="Most/least popular vaccine by race/ethnicity">
-			</form>
-		</button>
-        <!--graph info here-->
-	</div>
+  <header>
+		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
+  </header>
+  <body>
+    <canvas id="mychart" width="400" height="400"></canvas>
+    <script>
+    //   function produceGraph1() {
+        var ctx = document.getElementById("mychart");
+        var data = {
+          labels: ["White", "Latino", "Asian", "Black"],
+          datasets: [
+            {
+              label: "J&J",
+              fillColor: "blue",
+              data: ["white_jj", "latino_jj", "asian_jj", "black_jj"],
+            },
+            {
+              label: "Moderna",
+              fillColor: "red",
+              data: [
+                "white_moderna",
+                "latino_moderna",
+                "asian_moderna",
+                "black_moderna",
+              ],
+            },
+            {
+              label: "Pfizer",
+              fillColor: "green",
+              data: [
+                "white_pfizer",
+                "latino_pfizer",
+                "asian_pfizer",
+                "black_pfizer",
+              ],
+            },
+          ],
+        };
+        var myBarChart = new Chart(ctx, {type:'bar', data});
+      // }
+    </script>
+    <div align="center">
+      <h1>Analytics page</h1>
+
+      <button
+        type="button"
+        value="Most/least popular vaccine by race/ethnicity"
+        onclick="produceGraph1();"
+      >
+        <form align="left" id="mychart" action="race" method="get">
+          <input
+            type="submit"
+            name="race"
+            value="Most/least popular vaccine by race/ethnicity"
+          />
+        </form>
+      </button>
+    </div>
+  </body>
 </html>
 {% endblock content %}
