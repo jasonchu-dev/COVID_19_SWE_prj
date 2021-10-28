@@ -1,26 +1,108 @@
-{% load static %} {% block content %}
-<html>
-  <head>
-    <!--LINK JQUERY-->
-    <!-- <script type="text/javascript" src="jquery-3.3.1.js"></script> -->
-    <!--Personal JS-->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
-    >
-    </script>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      tpye="text/css"
-      href="{% static 'css/styles.css' %}"
-    />
-    <title>Analytics</title>
-  </head>
 
-  <header>
-		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
-  </header>
+{% load static %}
+
+{% block content %}
+<html>
+<head>
+    <!--LINK JQUERY-->
+    <!--<script type="text/javascript" src="jquery-3.3.1.js"></script>-->
+    <!--Personal JS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+    <title>Analytics</title>
+</head>
+
+<header>
+    <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
+</header>
+<div align="center">
+
+    <canvas id="vaccinationLineChart" width="400" height="400"></canvas>
+    <script>
+        var text = "{{text}}";
+        var July20 = "{{July20}}";
+        var August20 = "{{August20}}";
+        var September20 = "{{September20}}";
+        var October20 = "{{October20}}";
+        var November20 = "{{November20}}";
+        var December20 = "{{December20}}";
+        var January21 = "{{January21}}";
+        var February21 = "{{February21}}";
+        var March21 = "{{March21}}";
+        var April21 = "{{April21}}";
+        var May21 = "{{May21}}";
+        var June21 = "{{June21}}";
+        var July21 = "{{July21}}";
+        var August21 = "{{August21}}";
+        var September21 = "{{September21}}";
+        var October21 = "{{October21}}";
+
+        function produceGraphMonthly() {
+
+            var ctx = document.getElementById('vaccinationLineChart');
+            var makeGraphMonthly = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['July 2020', 'August 2020', 'September 2020', 'October 2020', 'November 2020', 'December 2020', 'January 2021', 'February 2021', 'March 2021', 'April 2021', 'May 2021', 'June 2021', 'July 2021', 'August 2021', 'September 2021', 'October 2021'],
+                    datasets: [{
+                        label: '# of Vaccinations',
+                        data: [July20, August20, September20, October20, November20, December20, January21, February21, March21, April21, May21, June21, July21, August21, September21, October21],
+
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 99, 131, 0.2)',
+                            'rgba(54, 162, 231, 0.2)',
+                            'rgba(255, 206, 81, 0.2)',
+                            'rgba(75, 192, 191, 0.2)',
+                            'rgba(153, 102, 251, 0.2)',
+                            'rgba(255, 159, 61, 0.2)',
+                            'rgba(255, 99, 133, 0.2)',
+                            'rgba(54, 162, 233, 0.2)',
+                            'rgba(255, 206, 83, 0.2)',
+                            'rgba(75, 192, 193, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 131, 1)',
+                            'rgba(54, 162, 231, 1)',
+                            'rgba(255, 206, 81, 1)',
+                            'rgba(75, 192, 191, 1)',
+                            'rgba(153, 102, 251, 1)',
+                            'rgba(255, 159, 61, 1)',
+                            'rgba(255, 99, 133, 1)',
+                            'rgba(54, 162, 233, 1)',
+                            'rgba(255, 206, 83, 1)',
+                            'rgba(75, 192, 193, 1)'
+                        ],
+                        borderWidth: 1,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</div>
   <body>
     <canvas id="mychart" width="400" height="400"></canvas>
     <script>
@@ -135,6 +217,15 @@
           />
         </form>
       </button>
+      <button type="button"
+            value="Number of vaccinations each month"
+            onclick="produceGraphMonthly(); return false;">
+        <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
+            <input type="submit"
+                   name="monthlyVaccs"
+                   value="Number of vaccinations each month" />
+        </form>
+    </button>
     </div>
   </body>
 </html>

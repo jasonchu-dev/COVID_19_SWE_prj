@@ -50,6 +50,13 @@ class Pages(models.Model):
     def __str__(self):
         return "{}-{}".format(self.R_E, self.percent)
 
+class PagesMonthly(models.Model):
+    months = models.CharField(max_length=220)
+    num_of_vax = models.IntegerField()
+
+    def __str__(self):
+        return "{}-{}".format(self.months, self.num_of_vax)
+
 #(CHANGE PATH ON LOCAL PC!!)
 csvFilePath = '/Users/brayanmontiel/Documents/UCR/2021--CURRENT/FALL 2021/CS180/codebase/project-main/cs180project-022-cs180ucrejects/codebase/repo/pages/demographics.csv'
 #correctly parsed json file 
