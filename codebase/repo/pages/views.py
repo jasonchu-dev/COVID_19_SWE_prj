@@ -1,6 +1,7 @@
 # pages/views.py
 from django.views.generic import TemplateView
 from django.shortcuts import render
+from .models import Pages
 import requests
 import json
 
@@ -25,6 +26,8 @@ class InsertPageView(TemplateView):
 
 class AnalyticsPageView(TemplateView):
     template_name = 'analytics.html'
+
+
 
 #search method
 def results(request):
@@ -137,3 +140,108 @@ def backup_record(request):
     jsonFile.close()
     s5 = 'Record has been successfully backed up. Thank you.'
     return render(request,'home.html',{'backup':s5})
+
+def monthly_vaccination_analytics(request):
+    #input = request.GET['monthlyVaccs']
+    sm_v_a = 'Chart is made';
+
+    blankEntries = 0;
+
+    July20 = 0;
+    August20 = 0;
+    September20 = 0;
+    October20 = 0;
+    November20 = 0;
+    December20 = 0;
+
+    January21 = 0;
+    February21 = 0;
+    March21 = 0;
+    April21 = 0;
+    May21 = 0;
+    June21 = 0;
+    July21 = 0;
+    August21 = 0;
+    September21 = 0;
+    October21 = 0;
+    
+    currentDate = "";
+    currentMonth = "";
+    currentDay = "";
+    currentYear = "";
+
+    for i in data:
+        currentDate = i['administered_date']; 
+        if len(currentDate) is not "0":
+            currentMonth, currentDay, currentYear = currentDate.split('/');
+        else:
+            currentMonth = "0";
+            currentDay = "0";
+            currentYear = "0";
+
+        if currentMonth == "0":
+            blankEntries += 1;
+        elif currentMonth == "1":
+            January21 += 1;
+        elif currentMonth == "2":
+            February21 += 1;
+        elif currentMonth == "3":
+            March21 += 1;
+        elif currentMonth == "4":
+            April21 += 1;
+        elif currentMonth == "5":
+            May21 += 1;
+        elif currentMonth == "6":
+            June21 += 1;
+        elif currentMonth == "7":
+            if currentYear == "20":
+                July20 += 1;
+            else:
+                July21 += 1;
+        elif currentMonth == "8":
+            if currentYear == "20":
+                August20 += 1;
+            else:
+                August21 += 1;
+        elif currentMonth == "9":
+            if currentYear == "20":
+                September20 += 1;
+            else:
+                September21 += 1;
+        elif currentMonth == "10":
+            if currentYear == "20":
+                October20 += 1;
+            else:
+                October21 += 1;
+        elif currentMonth == "11":
+            if currentYear == "20":
+                November20 += 1;
+            else:
+                November21 += 1;
+        elif currentMonth == "12":
+            if currentYear == "20":
+                December20 += 1;
+            else:
+                December21 += 1;
+        else:
+            sm_v_a = 'invalid date found';
+ 
+    return render(request, 'analytics.html', {
+        'text':sm_v_a,
+        'July20':July20,
+        'August20':August20,
+        'September20':September20,
+        'October20':October20,
+        'November20':November20,
+        'December20':December20,
+        'January21':January21,
+        'February21':February21,
+        'March21':March21,
+        'April21':April21,
+        'May21':May21,
+        'June21':June21,
+        'July21':July21,
+        'August21':August21,
+        'September21':September21,
+        'October21':October21
+        } );

@@ -43,6 +43,13 @@ def search_json_file(jsonFilePath):
     # Closing file
     f.close()
 
+class Pages(models.Model):
+    months = models.CharField(max_length=220)
+    num_of_vax = models.IntegerField()
+
+    def str(self):
+        return "{}-{}".format(self.months, self.num_of_vax)
+
 
 
 #(CHANGE PATH ON LOCAL PC!!)
