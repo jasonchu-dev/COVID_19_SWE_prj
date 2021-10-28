@@ -1,4 +1,5 @@
-﻿{% load static %}
+
+{% load static %}
 
 {% block content %}
 <html>
@@ -19,7 +20,6 @@
     <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
 </header>
 <div align="center">
-    <h1>Analytics page</h1>
 
     <canvas id="vaccinationLineChart" width="400" height="400"></canvas>
     <script>
@@ -102,8 +102,122 @@
             });
         }
     </script>
+</div>
+  <body>
+    <canvas id="mychart" width="400" height="400"></canvas>
+    <script>
+    var white_jj = "{{white_jj}}";
+    var white_moderna = "{{white_moderna}}";
+    var white_pfizer = "{{white_pfizer}}";
+    var latino_jj = "{{latino_jj}}";
+    var latino_moderna = "{{latino_moderna}}";
+    var latino_pfizer = "{{latino_pfizer}}";
+    var asian_jj = "{{asian_jj}}";
+    var asian_moderna = "{{asian_moderna}}";
+    var asian_pfizer = "{{asian_pfizer}}";
+    var black_jj = "{{black_jj}}";
+    var black_moderna = "{{black_moderna}}";
+    var black_pfizer = "{{black_pfizer}}";
+    function produceGraph1() {
+      var ctx = document.getElementById("mychart");
+      var data = {
+        labels: ["White", "Latino", "Asian", "Black"],
+        datasets: [
+          {
+            label: "J&J",
+            data: [
+              white_jj, 
+              latino_jj, 
+              asian_jj, 
+              black_jj
+            ],
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+          },
+          {
+            label: "Moderna",
+            data: [
+              white_moderna,
+              latino_moderna,
+              asian_moderna,
+              black_moderna,
+            ],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+              'rgba(75, 192, 192, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+          },
+          {
+            label: "Pfizer",
+            data: [
+              white_pfizer,
+              latino_pfizer,
+              asian_pfizer,
+              black_pfizer,
+            ],
+            backgroundColor: [
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+              'rgba(153, 102, 255, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+          },
+        ],
+      };
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+      var myBarChart = new Chart(ctx, {type:'bar', data});
+    }
+    </script>
+    <div align="center">
+      <h1>Analytics page</h1>
 
-    <button type="button"
+      <button
+        type="button"
+        value="Most/least popular vaccine by race/ethnicity"
+        onclick="produceGraph1(); return false;"
+      >
+        <form align="left" id="mychart" action="race" method="get">
+          <input
+            type="submit"
+            name="race"
+            value="Most/least popular vaccine by race/ethnicity"
+          />
+        </form>
+      </button>
+      <button type="button"
             value="Number of vaccinations each month"
             onclick="produceGraphMonthly(); return false;">
         <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
@@ -112,6 +226,7 @@
                    value="Number of vaccinations each month" />
         </form>
     </button>
-</div>
+    </div>
+  </body>
 </html>
 {% endblock content %}

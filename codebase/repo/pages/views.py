@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from .models import Pages
+from .models import PagesMonthly
 import requests
 import json
 
@@ -27,6 +28,11 @@ class InsertPageView(TemplateView):
 class AnalyticsPageView(TemplateView):
     template_name = 'analytics.html'
 
+
+# def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     context["qs"] = Pages.objects.all()
+#     return context
 
 
 #search method
@@ -143,88 +149,88 @@ def backup_record(request):
 
 def monthly_vaccination_analytics(request):
     #input = request.GET['monthlyVaccs']
-    sm_v_a = 'Chart is made';
+    sm_v_a = 'Chart is made'
 
-    blankEntries = 0;
+    blankEntries = 0
 
-    July20 = 0;
-    August20 = 0;
-    September20 = 0;
-    October20 = 0;
-    November20 = 0;
-    December20 = 0;
+    July20 = 0
+    August20 = 0
+    September20 = 0
+    October20 = 0
+    November20 = 0
+    December20 = 0
 
-    January21 = 0;
-    February21 = 0;
-    March21 = 0;
-    April21 = 0;
-    May21 = 0;
-    June21 = 0;
-    July21 = 0;
-    August21 = 0;
-    September21 = 0;
-    October21 = 0;
+    January21 = 0
+    February21 = 0
+    March21 = 0
+    April21 = 0
+    May21 = 0
+    June21 = 0
+    July21 = 0
+    August21 = 0
+    September21 = 0
+    October21 = 0
     
-    currentDate = "";
-    currentMonth = "";
-    currentDay = "";
-    currentYear = "";
+    currentDate = ""
+    currentMonth = ""
+    currentDay = ""
+    currentYear = ""
 
     for i in data:
-        currentDate = i['administered_date']; 
+        currentDate = i['administered_date']
         if len(currentDate) is not "0":
-            currentMonth, currentDay, currentYear = currentDate.split('/');
+            currentMonth, currentDay, currentYear = currentDate.split('/')
         else:
-            currentMonth = "0";
-            currentDay = "0";
-            currentYear = "0";
+            currentMonth = "0"
+            currentDay = "0"
+            currentYear = "0"
 
         if currentMonth == "0":
-            blankEntries += 1;
+            blankEntries += 1
         elif currentMonth == "1":
-            January21 += 1;
+            January21 += 1
         elif currentMonth == "2":
-            February21 += 1;
+            February21 += 1
         elif currentMonth == "3":
-            March21 += 1;
+            March21 += 1
         elif currentMonth == "4":
-            April21 += 1;
+            April21 += 1
         elif currentMonth == "5":
-            May21 += 1;
+            May21 += 1
         elif currentMonth == "6":
-            June21 += 1;
+            June21 += 1
         elif currentMonth == "7":
             if currentYear == "20":
-                July20 += 1;
+                July20 += 1
             else:
-                July21 += 1;
+                July21 += 1
         elif currentMonth == "8":
             if currentYear == "20":
-                August20 += 1;
+                August20 += 1
             else:
-                August21 += 1;
+                August21 += 1
         elif currentMonth == "9":
             if currentYear == "20":
-                September20 += 1;
+                September20 += 1
             else:
-                September21 += 1;
+                September21 += 1
         elif currentMonth == "10":
             if currentYear == "20":
-                October20 += 1;
+                October20 += 1
             else:
-                October21 += 1;
+                October21 += 1
         elif currentMonth == "11":
             if currentYear == "20":
-                November20 += 1;
+                November20 += 1
             else:
-                November21 += 1;
+                November21 += 1
         elif currentMonth == "12":
             if currentYear == "20":
-                December20 += 1;
+                December20 += 1
             else:
-                December21 += 1;
+                December21 += 1
         else:
-            sm_v_a = 'invalid date found';
+            sm_v_a = 'invalid date found'
  
     return render(request, 'analytics.html', {
         'text':sm_v_a,
@@ -244,4 +250,56 @@ def monthly_vaccination_analytics(request):
         'August21':August21,
         'September21':September21,
         'October21':October21
-        } );
+        })
+
+def race_vaccine_analytics(request):
+    white_jj = 0
+    white_moderna = 0
+    white_pfizer = 0
+
+    latino_jj = 0
+    latino_moderna = 0
+    latino_pfizer = 0
+
+    asian_jj = 0
+    asian_moderna = 0
+    asian_pfizer = 0
+
+    black_jj = 0
+    black_moderna = 0
+    black_pfizer = 0
+
+    for i in data:
+        if i['demographic_value'] == 'White':
+            white_jj += i['jj_doses']
+            white_moderna += i['moderna_doses']
+            white_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Latino':
+            latino_jj += i['jj_doses']
+            latino_moderna += i['moderna_doses']
+            latino_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Asian':
+            asian_jj += i['jj_doses']
+            asian_moderna += i['moderna_doses']
+            asian_pfizer += i['pfizer_doses']
+        if i['demographic_value'] == 'Black or African American':
+            black_jj += i['jj_doses']
+            black_moderna += i['moderna_doses']
+            black_pfizer += i['pfizer_doses'] 
+
+    s6 = 'Chart is made'
+    return render(request, 'analytics.html', {
+        'race':s6,
+        'white_jj':white_jj,
+        'white_moderna':white_moderna,
+        'white_pfizer':white_pfizer,
+        'latino_jj':latino_jj,
+        'latino_moderna':latino_moderna,
+        'latino_pfizer':latino_pfizer,
+        'asian_jj':asian_jj,
+        'asian_moderna':asian_moderna,
+        'asian_pfizer':asian_pfizer,
+        'black_jj':black_jj,
+        'black_moderna':black_moderna,
+        'black_pfizer':black_pfizer
+        })
