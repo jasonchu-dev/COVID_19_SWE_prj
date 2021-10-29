@@ -1,7 +1,11 @@
 # pages/urls.py
+from django.contrib import admin
 from django.urls import path
+from pages.views import race_vaccine_analytics
+from pages.views import monthly_vaccination_analytics
 from . import views
-from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView # new
+from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView, Analytics2PageView # new
+
 
 urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
@@ -13,5 +17,9 @@ urlpatterns = [
     path('insert/insert', views.insert_record, name='insert_results'), 
     path('insert/modify', views.modify_record, name='modify_results'), 
     path('backup/', views.backup_record, name='backup'), 
+    path('admin/', admin.site.urls),
     path('analytics/', AnalyticsPageView.as_view(), name='analytics'), 
+    path('analytics/monthlyVaccs', views.monthly_vaccination_analytics, name='analytics'),
+    path('analytics/race', views.race_vaccine_analytics, name='analytics'),
+    path('analytics/analytics2', Analytics2PageView.as_view(), name='analytics2'),
 ]
