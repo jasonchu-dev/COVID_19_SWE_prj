@@ -4,7 +4,7 @@ from django.urls import path
 from pages.views import race_vaccine_analytics
 from pages.views import monthly_vaccination_analytics
 from . import views
-from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView # new
+from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView, Analytics2PageView # new
 
 
 urlpatterns = [
@@ -21,4 +21,5 @@ urlpatterns = [
     path('analytics/', AnalyticsPageView.as_view(), name='analytics'), 
     path('analytics/monthlyVaccs', views.monthly_vaccination_analytics, name='analytics'),
     path('analytics/race', views.race_vaccine_analytics, name='analytics'),
+    path('analytics/analytics2', Analytics2PageView.as_view(), name='analytics2'),
 ]
