@@ -32,6 +32,7 @@
     <canvas id="mychart" width="500" height="350"></canvas>
     <br>
     <p>Click button to analyze vaccine data by: </p>
+
     <button class="myButton" value="Monthly" onclick="toggleChart1(); return false;">
       <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
         <input type="submit" name="monthlyVaccs" value="Monthly" />
@@ -43,9 +44,17 @@
         <input type="submit" name="race" value="Ethinicty" />
       </form>
     </button>
-  </div> 
+
+    <button class="myButton" value="Gender" onclick="toggleChart3();  return false;">
+      <form align="left" id="mychart" action="gender" method="get">
+        <input type="submit" name="genderChart" value="Gender" />
+      </form>
+    </button>
+
+  </div>
 
   <script>
+    //------------------------------------VaccinationLineChart---------------------------------------------
     var text = "{{text}}";
     var July20 = "{{July20}}";
     var August20 = "{{August20}}";
@@ -66,7 +75,7 @@
 
     function produceGraphMonthly() {
       var ctx = document.getElementById('mychart');
-      var myBarChart = new Chart(ctx, {
+      var myChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: ['July 2020', 'August 2020', 'September 2020', 'October 2020', 'November 2020', 'December 2020', 'January 2021', 'February 2021', 'March 2021', 'April 2021', 'May 2021', 'June 2021', 'July 2021', 'August 2021', 'September 2021', 'October 2021'],
@@ -128,7 +137,8 @@
       produceGraphMonthly();
     }
 
-    //----------------------------------------------------------
+    //------------------------------------Vaccine Preference by Ethnicity---------------------------------------------
+
 
     var white_jj = "{{white_jj}}";
     var white_moderna = "{{white_moderna}}";
@@ -223,13 +233,65 @@
           }
         }
       }
-      var myBarChart = new Chart(ctx, { type: 'bar', data });
+      var myChart = new Chart(ctx, { type: 'bar', data });
     }
 
     function toggleChart2() {
       produceGraph1();
     }
+
+    //------------------------------------Gender Most/Least Vaccinated---------------------------------------------
+    var maleVacc = "{{maleVacc}}";
+    var femVacc = "{{femVacc}}";
+    var otherVacc = "{{otherVacc}}";
+
+
+    function mfPiechart() {
+      var myChart = new Chart(document.getElementById('mychart').getContext('2d'), {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: [maleVacc, femVacc, otherVacc],
+            backgroundColor: ['#FB3640', '#EFCA08', '#43AA8B']
+          }],
+          labels: ['Male 🙋‍♂️', 'Female 🙋‍♀️', 'Other 🙋']
+        },
+        options: {
+          responsive: true,
+          legend: {
+            position: 'bottom'
+          },
+          plugins: {
+            datalabels: {
+              color: '#fff',
+              anchor: 'end',
+              align: 'start',
+              offset: -10,
+              borderWidth: 2,
+              borderColor: '#fff',
+              borderRadius: 25,
+              backgroundColor: (context) => {
+                return context.dataset.backgroundColor;
+              },
+              font: {
+                weight: 'bold',
+                size: '10'
+              },
+              formatter: (value) => {
+                return value + ' %';
+              }
+            }
+          }
+        }
+      })
+    }
+
+    function toggleChart3() {
+      mfPiechart();
+    }
+
   </script>
+
 </body>
 
 
@@ -334,5 +396,6 @@
   }
 </script>
 -->
+
 </html>
 {% endblock content %}
