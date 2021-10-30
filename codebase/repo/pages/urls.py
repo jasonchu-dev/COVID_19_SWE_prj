@@ -21,5 +21,6 @@ urlpatterns = [
     path('analytics/', AnalyticsPageView.as_view(), name='analytics'), 
     path('analytics/monthlyVaccs', views.monthly_vaccination_analytics, name='analytics'),
     path('analytics/race', views.race_vaccine_analytics, name='analytics'),
+    path('analytics/gender', views.mfpiechart, name='analytics'),
     path('analytics/analytics2', Analytics2PageView.as_view(), name='analytics2'),
 ]
