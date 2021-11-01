@@ -18,9 +18,9 @@
 
 
 <body>
-  <div align="center">
-    <h1>Analytics Page 📈</h1>
-    <!--Personal JS
+    <div align="center">
+        <h1>Analytics Page 📈</h1>
+        <!--Personal JS
     SINCE CHART CAN'T BE CHANGED, TRY TOGGLING BEWTEEN THE DIFFERENT CHARTS
     <form action="analytics2" method="get">
       <button type="submit">
@@ -28,30 +28,36 @@
       </button>
     </form>
     -->
-    <br>
-    <canvas id="mychart" width="500" height="350"></canvas>
-    <br>
-    <p>Click button to analyze vaccine data by: </p>
+        <br>
+        <canvas id="mychart" width="500" height="350"></canvas>
+        <br>
+        <p>Click button to analyze vaccine data by: </p>
 
-    <button class="myButton" value="Monthly" onclick="toggleChart1(); return false;">
-      <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
-        <input type="submit" name="monthlyVaccs" value="Monthly" />
-      </form>
-    </button>
+        <button class="myButton" value="Monthly" onclick="toggleChart1(); return false;">
+            <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
+                <input type="submit" name="monthlyVaccs" value="Monthly" />
+            </form>
+        </button>
 
-    <button class="myButton" value="Ethnicity" onclick="toggleChart2();  return false;">
-      <form align="left" id="mychart" action="race" method="get">
-        <input type="submit" name="race" value="Ethnicity" />
-      </form>
-    </button>
+        <button class="myButton" value="Ethnicity" onclick="toggleChart2();  return false;">
+            <form align="left" id="mychart" action="race" method="get">
+                <input type="submit" name="race" value="Ethnicity" />
+            </form>
+        </button>
 
-    <button class="myButton" value="Gender" onclick="toggleChart3();  return false;">
-      <form align="left" id="mychart" action="gender" method="get">
-        <input type="submit" name="genderChart" value="Gender" />
-      </form>
-    </button>
+        <button class="myButton" value="Gender" onclick="toggleChart3();  return false;">
+            <form align="left" id="mychart" action="gender" method="get">
+                <input type="submit" name="genderChart" value="Gender" />
+            </form>
+        </button>
 
-  </div>
+        <button class="myButton" value="Fully Vaccinated" onclick="toggleChart4();  return false;">
+            <form align="left" id="fullyVacc" action="fullyVacc" method="get">
+                <input type="submit" name="fullyVacc" value="Fully Vaccinated" />
+            </form>
+        </button>
+
+    </div>
 
   <script>
     //------------------------------------VaccinationLineChart---------------------------------------------
@@ -289,6 +295,56 @@
     function toggleChart3() {
       mfPiechart();
     }
+
+    //------------------------------------Fully Vaccinated over Partially---------------------------------------------
+      var malePartVacc = "{{malePartVacc}}";
+      var femPartVacc = "{{femPartVacc}}";
+      var otherPartVacc = "{{otherPartVacc}}";
+
+      var maleFullVacc = "{{maleFullVacc}}";
+      var femFullVacc = "{{femFullVacc}}";
+      var otherFullVacc = "{{otherFullVacc}}";
+
+      var malePercentage = (maleFullVacc * 100) / (malePartVacc); 
+      var femPercentage = (femFullVacc * 100) / (femPartVacc);
+      var otherPercentage = (otherFullVacc * 100) / (otherPartVacc);
+
+      function produceFullyVaccinatedRatioGraph() {
+          var ctx = document.getElementById('mychart');
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: ['Male', 'Female', 'Other'],
+                      datasets: [{
+                          label: '% to get fully Vaccinated',
+                          data: [malePercentage, femPercentage, otherPercentage],
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+      }
+
+      function toggleChart4() {
+          produceFullyVaccinatedRatioGraph();
+      }
+
 
   </script>
 
