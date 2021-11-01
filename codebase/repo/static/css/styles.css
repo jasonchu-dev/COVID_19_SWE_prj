@@ -75,13 +75,7 @@ p {
 .container {
 	height: 100vh;
 }
-  
-.chart-wrapper {
-	width: 500px;	
-	height: 500px;
-	margin: 0 auto;
-	align-items: center;
-}
+
 
 .myButton {
 	box-shadow:inset 0px -3px 7px 0px #29bbff;

@@ -3,35 +3,35 @@
 {% block content %}
 <html>
   <head>
-      <!--LINK JQUERY-->
-      <!--<script type="text/javascript" src="jquery-3.3.1.js"></script>-->
-      <!--Personal JS-->
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js">
-      </script>
-  </head>
-  <head>
-      <meta charset="UTF-8">
-      <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+    <title>Pie Chart with Chart.js</title>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous">
       <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a>
       <title>Analytics2</title>
   </head>
 
   <body>
-      <div class="wrapper">
+    <div class="wrapper">
       <div class="container d-flex flex-column justify-content-center align-items-center">
         <div class="title text-center mb-5">
-        
+          <h1>What's your favorite FOOD?</h1>
         </div>
         <div class="chart-wrapper">
           <canvas id="myChart"></canvas>
         </div>
       </div>
     </div>
-
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="{% static 'css/script.js' %}"></script>
+    <script src="./js/script.js"></script>
   </body>
+  
 
 </html>
 {% endblock content %}

@@ -29,23 +29,23 @@
     </form>
     -->
     <br>
-    <canvas id="mychart" width="500" height="350"></canvas>
+    <canvas id="mychart" width="500" height="375"></canvas>
     <br>
     <p>Click button to analyze vaccine data by: </p>
 
-    <button class="myButton" value="Monthly" onclick="toggleChart1(); return false;">
+    <button class="myButton" value="Monthly" onclick="produceGraphMonthly(); return false;">
       <form align="left" id="vaccinationLineChart" action="monthlyVaccs" method="get">
         <input type="submit" name="monthlyVaccs" value="Monthly" />
       </form>
     </button>
 
-    <button class="myButton" value="Ethinicty" onclick="toggleChart2();  return false;">
+    <button class="myButton" value="Ethinicty" onclick="produceGraph1();  return false;">
       <form align="left" id="mychart" action="race" method="get">
         <input type="submit" name="race" value="Ethinicty" />
       </form>
     </button>
 
-    <button class="myButton" value="Gender" onclick="toggleChart3();  return false;">
+    <button class="myButton" value="Gender" onclick="mfPiechart();  return false;">
       <form align="left" id="mychart" action="gender" method="get">
         <input type="submit" name="genderChart" value="Gender" />
       </form>
@@ -131,10 +131,6 @@
           }
         }
       });
-    }
-
-    function toggleChart1() {
-      produceGraphMonthly();
     }
 
     //------------------------------------Vaccine Preference by Ethnicity---------------------------------------------
@@ -236,10 +232,6 @@
       var myChart = new Chart(ctx, { type: 'bar', data });
     }
 
-    function toggleChart2() {
-      produceGraph1();
-    }
-
     //------------------------------------Gender Most/Least Vaccinated---------------------------------------------
     var maleVacc = "{{maleVacc}}";
     var femVacc = "{{femVacc}}";
@@ -247,7 +239,8 @@
 
 
     function mfPiechart() {
-      var myChart = new Chart(document.getElementById('mychart').getContext('2d'), {
+      var ctx = document.getElementById('mychart').getContext('2d');
+      var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
           datasets: [{
@@ -277,8 +270,14 @@
                 weight: 'bold',
                 size: '10'
               },
-              formatter: (value) => {
-                return value + ' %';
+              formatter: (value, ctx) => {
+                let sum = 0;
+                let dataArr = ctx.chart.data.datasets[0].data;
+                dataArr.map(data => {
+                    sum += data;
+                });
+                let percentage = (value*100 / sum).toFixed(2)+"%";
+                return percentage;
               }
             }
           }
@@ -286,19 +285,14 @@
       })
     }
 
-    function toggleChart3() {
-      mfPiechart();
-    }
-
   </script>
-
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script> 
 </body>
 
 
 
 
 <!--Personal JS
-
 <script>
   var white_jj = "{{white_jj}}";
   var white_moderna = "{{white_moderna}}";
