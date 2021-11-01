@@ -300,30 +300,35 @@
       var malePartVacc = "{{malePartVacc}}";
       var femPartVacc = "{{femPartVacc}}";
       var otherPartVacc = "{{otherPartVacc}}";
+      var overallPartVacc = "{{overallPartVacc}}";
 
       var maleFullVacc = "{{maleFullVacc}}";
       var femFullVacc = "{{femFullVacc}}";
       var otherFullVacc = "{{otherFullVacc}}";
+      var overallFullVacc = "{{overallFullVacc}}";
 
       var malePercentage = (maleFullVacc * 100) / (malePartVacc); 
       var femPercentage = (femFullVacc * 100) / (femPartVacc);
       var otherPercentage = (otherFullVacc * 100) / (otherPartVacc);
+      var overallPercentage = (overallFullVacc * 100) / (overallPartVacc);
 
       function produceFullyVaccinatedRatioGraph() {
           var ctx = document.getElementById('mychart');
           var myChart = new Chart(ctx, {
               type: 'bar',
               data: {
-                  labels: ['Male', 'Female', 'Other'],
+                  labels: ['Overall','Male', 'Female', 'Other'],
                       datasets: [{
                           label: '% to get fully Vaccinated',
-                          data: [malePercentage, femPercentage, otherPercentage],
+                          data: [overallPercentage, malePercentage, femPercentage, otherPercentage],
                       backgroundColor: [
+                          'rgba(0, 187, 39, 0.2)',
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(54, 162, 235, 0.2)',
                           'rgba(255, 206, 86, 0.2)'
                       ],
                       borderColor: [
+                          'rgba(0, 187, 39, 1)',
                           'rgba(255, 99, 132, 1)',
                           'rgba(54, 162, 235, 1)',
                           'rgba(255, 206, 86, 1)'

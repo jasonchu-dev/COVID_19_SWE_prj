@@ -181,59 +181,60 @@ def monthly_vaccination_analytics(request):
 
     for i in data:
         currentDate = i['administered_date']
-        if len(currentDate) is not "0":
+        if len(currentDate) != "0":
             currentMonth, currentDay, currentYear = currentDate.split('/')
         else:
             currentMonth = "0"
             currentDay = "0"
             currentYear = "0"
-
-        if currentMonth == "0":
-            blankEntries += i['total_doses']
-        elif currentMonth == "1":
-            January21 += i['total_doses']
-        elif currentMonth == "2":
-            February21 += i['total_doses']
-        elif currentMonth == "3":
-            March21 += i['total_doses']
-        elif currentMonth == "4":
-            April21 += i['total_doses']
-        elif currentMonth == "5":
-            May21 += i['total_doses']
-        elif currentMonth == "6":
-            June21 += i['total_doses']
-        elif currentMonth == "7":
-            if currentYear == "20":
-                July20 += i['total_doses']
+        
+        if i['demographic_category'] == 'Gender': #using gender because someone can be white, male, 65+ for example and we would count them three times. This prevents recounting
+            if currentMonth == "0":
+                blankEntries += i['total_doses']
+            elif currentMonth == "1":
+                January21 += i['total_doses']
+            elif currentMonth == "2":
+                February21 += i['total_doses']
+            elif currentMonth == "3":
+                March21 += i['total_doses']
+            elif currentMonth == "4":
+                April21 += i['total_doses']
+            elif currentMonth == "5":
+                May21 += i['total_doses']
+            elif currentMonth == "6":
+                June21 += i['total_doses']
+            elif currentMonth == "7":
+                if currentYear == "20":
+                    July20 += i['total_doses']
+                else:
+                    July21 += i['total_doses']
+            elif currentMonth == "8":
+                if currentYear == "20":
+                    August20 += i['total_doses']
+                else:
+                    August21 += i['total_doses']
+            elif currentMonth == "9":
+                if currentYear == "20":
+                    September20 += i['total_doses']
+                else:
+                    September21 += i['total_doses']
+            elif currentMonth == "10":
+                if currentYear == "20":
+                    October20 += i['total_doses']
+                else:
+                    October21 += i['total_doses']
+            elif currentMonth == "11":
+                if currentYear == "20":
+                    November20 += i['total_doses']
+                else:
+                    November21 += i['total_doses']
+            elif currentMonth == "12":
+                if currentYear == "20":
+                    December20 += i['total_doses']
+                else:
+                    December21 += i['total_doses']
             else:
-                July21 += i['total_doses']
-        elif currentMonth == "8":
-            if currentYear == "20":
-                August20 += i['total_doses']
-            else:
-                August21 += i['total_doses']
-        elif currentMonth == "9":
-            if currentYear == "20":
-                September20 += i['total_doses']
-            else:
-                September21 += i['total_doses']
-        elif currentMonth == "10":
-            if currentYear == "20":
-                October20 += i['total_doses']
-            else:
-                October21 += i['total_doses']
-        elif currentMonth == "11":
-            if currentYear == "20":
-                November20 += i['total_doses']
-            else:
-                November21 += i['total_doses']
-        elif currentMonth == "12":
-            if currentYear == "20":
-                December20 += i['total_doses']
-            else:
-                December21 += i['total_doses']
-        else:
-            sm_v_a = 'invalid date found'
+                sm_v_a = 'invalid date found'
  
     return render(request, 'analytics.html', {
         'text':sm_v_a,
@@ -326,6 +327,9 @@ def mfpiechart(request):
         })
 
 def fully_vaccinated_analytics(request):
+    overallFullVacc = 0
+    overallPartVacc = 0
+
     maleFullVacc = 0
     malePartVacc = 0
 
@@ -336,17 +340,23 @@ def fully_vaccinated_analytics(request):
     otherFullVacc = 0
 
     for i in data:
+        if i['demographic_category'] == 'Gender':
+            overallFullVacc += i['fully_vaccinated']
+            overallPartVacc += i['at_least_one_dose'] #need to use at_least_one_dose parameter to accurately count jj doses with the others
+
         if i['demographic_value'] == 'Male': 
             maleFullVacc += i['fully_vaccinated']
-            malePartVacc += i['partially_vaccinated']
+            malePartVacc += i['at_least_one_dose']
         elif i['demographic_value'] == 'Female': 
             femFullVacc += i['fully_vaccinated']
-            femPartVacc += i['partially_vaccinated']
+            femPartVacc += i['at_least_one_dose']
         elif i['demographic_value'] == 'Unknown/undifferentiated': 
             otherFullVacc += i['fully_vaccinated']
-            otherPartVacc += i['partially_vaccinated']
+            otherPartVacc += i['at_least_one_dose']
 
     return render(request, 'analytics.html', {
+        'overallFullVacc':overallFullVacc,
+        'overallPartVacc':overallPartVacc,
         'maleFullVacc':maleFullVacc,
         'malePartVacc':malePartVacc,
         'femFullVacc':femFullVacc,
