@@ -57,6 +57,12 @@
             </form>
         </button>
 
+        <button class="myButton" value="Most Administered Vaccine Brand" onclick="toggleChart5();  return false;">
+          <form align="left" id="brand" action="brand" method="get">
+              <input type="submit" name="brand" value="Most Administered Vaccine Brand" />
+          </form>
+        </button>
+
     </div>
 
   <script>
@@ -350,6 +356,55 @@
           produceFullyVaccinatedRatioGraph();
       }
 
+    //------------------------------------Which Vaccine Manufacturer was administered the most---------------------------------------------
+    var totalJJ = "{{total_jj}}";
+    var totalModerna = "{{total_moderna}}";
+    var totalPfizer = "{{total_pfizer}}";
+
+
+    function vaccinePiechart() {
+      var myChart = new Chart(document.getElementById('mychart').getContext('2d'), {
+        type: 'pie',
+        data: {
+          datasets: [{
+            data: [totalJJ, totalModerna, totalPfizer],
+            backgroundColor: ['#FB3640', '#EFCA08', '#43AA8B']
+          }],
+          labels: ['J&J', 'Moderna', 'Pfizer']
+        },
+        options: {
+          responsive: true,
+          legend: {
+            position: 'bottom'
+          },
+          plugins: {
+            datalabels: {
+              color: '#fff',
+              anchor: 'end',
+              align: 'start',
+              offset: -10,
+              borderWidth: 2,
+              borderColor: '#fff',
+              borderRadius: 25,
+              backgroundColor: (context) => {
+                return context.dataset.backgroundColor;
+              },
+              font: {
+                weight: 'bold',
+                size: '10'
+              },
+              formatter: (value) => {
+                return value + ' %';
+              }
+            }
+          }
+        }
+      })
+    }
+
+    function toggleChart5() {
+      vaccinePiechart();
+    }
 
   </script>
 
