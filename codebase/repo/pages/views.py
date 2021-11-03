@@ -371,3 +371,25 @@ def fully_vaccinated_analytics(request):
         'otherPartVacc':otherPartVacc,
         'otherFullVacc':otherFullVacc
         })
+
+def ageGroup(request):
+    under_eighteen = 0
+    over_eighteen = 0
+    over_fifty = 0
+    over_sixtyfive = 0
+    for i in data:
+        if i['demographic_value'] == '17-Dec': # JSON parsed this weirdly, so it converted the label "12-17" to "17-Dec" although it's the same value
+            under_eighteen += i['total_doses']
+        elif i['demographic_value'] == '18-49': 
+            over_eighteen += i['total_doses']
+        elif i['demographic_value'] == '50-64': 
+            over_fifty+= i['total_doses']
+        elif i['demographic_value'] == '65+': 
+            over_sixtyfive+= i['total_doses']
+
+    return render(request, 'analytics.html', {
+        'under_eighteen':under_eighteen,
+        'over_eighteen':over_eighteen,
+        'over_fifty':over_fifty,
+        'over_sixtyfive':over_sixtyfive
+        })
