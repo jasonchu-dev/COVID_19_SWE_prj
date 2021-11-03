@@ -291,6 +291,10 @@ def race_vaccine_analytics(request):
             black_moderna += i['moderna_doses']
             black_pfizer += i['pfizer_doses'] 
 
+    total_jj = white_jj + latino_jj + asian_jj + black_jj
+    total_moderna = white_moderna + latino_moderna + asian_moderna + black_moderna
+    total_pfizer = white_pfizer + latino_pfizer + asian_pfizer + black_pfizer
+
     s6 = 'Chart is made'
     return render(request, 'analytics.html', {
         'race':s6,
@@ -305,7 +309,10 @@ def race_vaccine_analytics(request):
         'asian_pfizer':asian_pfizer,
         'black_jj':black_jj,
         'black_moderna':black_moderna,
-        'black_pfizer':black_pfizer
+        'black_pfizer':black_pfizer,
+        'total_jj':total_jj,
+        'total_moderna':total_moderna,
+        'total_pfizer':total_pfizer
         })
 
 def mfpiechart(request):
