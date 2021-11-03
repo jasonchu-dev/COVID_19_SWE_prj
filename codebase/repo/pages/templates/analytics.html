@@ -57,6 +57,12 @@
             </form>
         </button>
 
+        <button class="myButton" value="Age Group" onclick="toggleChart6();  return false;">
+          <form align="left" id="age" action="age" method="get">
+              <input type="submit" name="age" value="Age Group" />
+          </form>
+        </button>
+
         <button class="myButton" value="Most Administered Vaccine Brand" onclick="toggleChart5();  return false;">
           <form align="left" id="brand" action="brand" method="get">
               <input type="submit" name="brand" value="Most Administered Vaccine Brand" />
@@ -405,6 +411,52 @@
     function toggleChart5() {
       vaccinePiechart();
     }
+
+  //------------------------------------Age Group Comparison---------------------------------------------
+    var under_eighteen = "{{under_eighteen}}";
+    var over_eighteen = "{{over_eighteen}}";
+    var over_fifty = "{{over_fifty}}";
+    var over_sixtyfive = "{{over_sixtyfive}}";
+
+
+    function produceAgeGroupGraph() {
+        var ctx = document.getElementById('mychart');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['12-17','18-49', '50-64', '65+'],
+                    datasets: [{
+                        label: '',
+                        data: [under_eighteen, over_eighteen, over_fifty, over_sixtyfive],
+                    backgroundColor: [
+                        'rgba(0, 187, 39, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 187, 39, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function toggleChart6() {
+      produceAgeGroupGraph();
+    }
+
 
   </script>
 
