@@ -14,14 +14,16 @@
 	<header>
 		<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a> | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'analytics' %}">Analytics</a> 
 	</header>
-
+	<font size=-1>
 	<div align="center"> 
 		<h2>Here are your results:</h2>
-		<p style="text-align:center">ID | Category | Value | Administered Date | Total Doses | Cumulative Doses | Pfizer Doses | Cumulative Pfizer Doses | Moderna Doses | Cumulative Moderna Doses | JJ Doses | Cumulative JJ Doses | Partially Vaccinated | Total Partially Vaccinated | Fully Vaccinated | Cumulative Fully Vaccinated | At Least One Dose | Cumulative At Least Once Dose
+		<p style="text-align:left">ID | Category | Value | Administered Date | Total Doses | Cumulative Doses | Pfizer Doses | Cumulative Pfizer Doses | Moderna Doses | Cumulative Moderna Doses | JJ Doses | Cumulative JJ Doses | Partially Vaccinated | Total Partially Vaccinated | Fully Vaccinated | Cumulative Fully Vaccinated | At Least One Dose | Cumulative At Least Once Dose
 		<br>
-		{{search}}
+		<br>
+		{{search|linebreaksbr}}
 		</p>
 	</div>
+	</font>
 </html>
 {% endblock content %}
 
