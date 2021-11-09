@@ -1,0 +1,89 @@
+{% load static %}
+
+{% block content %}
+<html>
+
+    <head>
+    <!--LINK JQUERY-->
+    <!--<script type="text/javascript" src="jquery-3.3.1.js"></script>-->
+    <!--Personal JS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" tpye="text/css" href="{% static 'css/styles.css' %}">
+    <a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'delete' %}">Delete</a>
+    | <a href="{% url 'insert' %}">Modify</a> | <a href="{% url 'increment' %}">Analytics</a>|
+    <title>Incremental Analytics</title>
+
+</head>
+
+
+<body>
+  
+    <div align="center">
+         <h4>Increment Analytics Page 📈</h4>
+         
+         
+        
+<!--
+         <br>
+         <canvas id="mychart" width="500" height="350"></canvas>
+         <br>
+         <p>Click button to analyze increment by Age group </p>
+
+         <button class="myButton" value="Increment" onclick="toggleChartA();  return false;">
+            <form align="left" id="Incrementbyage" action="Incrementbyage" method="get">
+                <input type="submit" name="incrementAnaly" value="increment" />
+            </form>
+          </button>
+
+-->
+        
+    </div>
+        <script>
+
+    //----------------------------Increment-------------------------------
+            
+            
+            var  increment18to49 = "{{increment18to49}}";
+            var  increment50to64 = "{{increment50to64}}";
+            var  increment65up = "{{ increment65up}}"
+
+            var incrementmale = "{{ incrementmale}}";
+            var incrementfem = "{{ incrementfem}}";
+            var incrementother = "{{ incrementother}}"
+            
+            
+            var str1 = "Increment Analytics Result:"
+            var str2 = "Increment of Male group: "
+            var str3 = "Increment of Female group: "
+            var str4 = "Increment of other group: "
+
+            
+            document.writeln('For Age Group '+ str1  );
+            document.write("<br>");
+            document.write(str2 + incrementmale);
+            document.write("<br>");
+            document.write(str3 + incrementfem);
+            document.write("<br>");
+            document.write(str4 + incrementother );
+            
+            document.write("<br>");
+            document.write("<br>");
+
+            document.writeln('For Gander Group '+ str1 );
+            document.write("<br>");
+            document.write( 'Increment of age 18-49 :'+ ' '+ increment18to49 );
+            document.write("<br>");
+            document.write( 'Increment of age 50-64 :' + ' '+ increment50to64 );
+            document.write("<br>");
+            document.write( 'Increment of age 65+ :' + ' '+  increment65up );
+
+  
+    </script>
+
+
+</body>
+    
+</html>
+
+ {% endblock content %}
