@@ -39,3 +39,74 @@ def results(request):
     # Closing file
     f.close()
     return render(request,'results.html',{'search':s2})
+
+#-----------------------------------------------
+def increment_analytics(request):
+ 
+    agefully18to49 =0
+    agecumfully18to49 =0
+    increment18to49 = 0
+  
+    agefully50to64 =0
+    agecumfully50to64 =0
+    increment50to64 = 0  
+    
+    agecumfully65up=0
+    agefully65up=0    
+    increment65up=0
+    
+    malefully =0
+    malecremfully=0
+    incrementmale= 0
+    
+    femfully=0
+    femcremfully=0
+    incrementfem =0
+    
+    otherfully = 0
+    othercremfully = 0
+    incrementother =0
+    
+    for i in data:
+         
+        if i['demographic_value'] == '18-49':
+            agecumfully18to49 += i['cumulative_fully_vaccinated']
+            agefully18to49    += i['fully_vaccinated']
+        elif i['demographic_value'] == '50-64': 
+            agecumfully50to64 += i['cumulative_fully_vaccinated']
+            agefully50to64    += i['fully_vaccinated']
+        elif i['demographic_value'] == '65+':         
+            agecumfully65up += i['cumulative_fully_vaccinated']
+            agefully65up += i['fully_vaccinated']
+        elif i['demographic_value'] == 'Male': 
+            malefully += i['fully_vaccinated']
+            malecremfully += i['cumulative_fully_vaccinated']
+        elif i['demographic_value'] == 'Female': 
+            femfully += i['fully_vaccinated']
+            femcremfully += i['cumulative_fully_vaccinated']
+        elif i['demographic_value'] == 'Unknown/undifferentiated': 
+            otherfully += i['fully_vaccinated']
+            othercremfully += i['cumulative_fully_vaccinated']
+        
+        
+        increment18to49 = agecumfully18to49 - agefully18to49
+        increment50to64 = agecumfully50to64 - agefully50to64
+        increment65up = agecumfully65up - agefully65up
+       
+        incrementmale = malecremfully - malefully 
+        incrementfem =femcremfully-femfully
+        incrementother = othercremfully - otherfully 
+     
+    
+    return render(request, 'increment.html', {
+          
+        'increment18to49':increment18to49, 
+        'increment50to64' : increment50to64,
+        'increment65up' : increment65up,
+        
+        'incrementmale' : incrementmale, 
+        'incrementfem': incrementfem,
+        'incrementother':incrementother
+        
+        })            
+            
