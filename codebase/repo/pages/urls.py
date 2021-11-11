@@ -7,7 +7,7 @@ from pages.views import fully_vaccinated_analytics
 from pages.views import increment_analytics
 
 from . import views
-from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView, Analytics2PageView, IncrementPageView # new # new
+from .views import HomePageView, AboutPageView, InsertPageView, DeletePageView, AnalyticsPageView, Analytics2PageView, IncrementPageView  # new
 
 
 urlpatterns = [
