@@ -31,7 +31,8 @@ class AnalyticsPageView(TemplateView):
 class Analytics2PageView(TemplateView):
     template_name = 'analytics2.html'
 
-
+class IncrementPageView(TemplateView):
+    template_name = 'increment.html'
 # def get_context_data(self, **kwargs):
 #     context = super().get_context_data(**kwargs)
 #     context["qs"] = Pages.objects.all()
