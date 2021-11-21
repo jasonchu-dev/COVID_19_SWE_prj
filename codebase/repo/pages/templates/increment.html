@@ -48,10 +48,15 @@
             var  increment50to64 = "{{increment50to64}}";
             var  increment65up = "{{ increment65up}}"
 
+
+            document.writeln('data struture '  );
+            list=[increment18to49,increment50to64,increment65up] 
+            document.writeln(list);
+
             var incrementmale = "{{ incrementmale}}";
             var incrementfem = "{{ incrementfem}}";
-            var incrementother = "{{ incrementother}}"
-            
+            var incrementother = "{{ incrementother}}";
+            var testvalue = "{{testvalue}}"
             
             var str1 = "Increment Analytics Result:"
             var str2 = "Increment of Male group: "
@@ -77,7 +82,7 @@
             document.write( 'Increment of age 50-64 :' + ' '+ increment50to64 );
             document.write("<br>");
             document.write( 'Increment of age 65+ :' + ' '+  increment65up );
-
+            document.writeln('testvalue '+ testvalue  );
   
     </script>
 
