@@ -6,6 +6,7 @@ from .models import PagesMonthly
 import requests
 import json
 
+
 #Load json into array data
 jsonFilePath = 'pages/demographics.json'
 f = open(jsonFilePath)
@@ -38,6 +39,16 @@ class IncrementPageView(TemplateView):
 #     context["qs"] = Pages.objects.all()
 #     return context
 
+
+#declear global var
+
+deletelist=[]
+modifylist=[] 
+insertlist=[]
+increment=[]
+saveAge=[]
+newage=[]
+incremAge=[]
 
 #search method
 def results(request):
@@ -82,9 +93,32 @@ def delete_record(request):
             i['at_least_one_dose'] = 0 
             i['cumulative_at_least_one_dose'] = 0
             s3 = 'Success. Entry record #' + input + ' has been deleted.'
+            
             break
         elif input != str(i['ID']) :
             s3 = 'Record not found. Please try again.'
+         
+    deletelist=[
+                    i['ID'],       
+                    i['demographic_category'],
+                    i['demographic_value'],  
+                    i['administered_date'] ,
+                    i['total_doses'] ,
+                    i['cumulative_total_doses'], 
+                    i['pfizer_doses'] ,
+                    i['cumulative_pfizer_doses'], 
+                    i['moderna_doses'] ,
+                    i['cumulative_moderna_doses'],
+                    i['jj_doses'],
+                    i['cumulative_jj_doses'] ,
+                    i['partially_vaccinated'],
+                    i['total_partially_vaccinated'],
+                    i['fully_vaccinated'],
+                    i['cumulative_fully_vaccinated'] ,
+                    i['at_least_one_dose'],
+                    i['cumulative_at_least_one_dose']
+               ]
+    
     return render(request,'delete.html',{'delete':s3})
 
 #insert method
@@ -100,7 +134,8 @@ def insert_record(request):
            maxIDNum = i['ID']
            
     #bam = {"ID" : 3, "demographic_category": "Age Group"}
-    newRecord = {"ID": maxIDNum + 1, 
+    newRecord = {
+           "ID": maxIDNum + 1, 
            "demographic_category": inputCat,
            "demographic_value": inputValue,
            "administered_date": inputDate,
@@ -119,7 +154,11 @@ def insert_record(request):
            "at_least_one_dose": 0,
            "cumulative_at_least_one_dose": 0}
     
+   
+    insertlist.append(newRecord)  
+      
     data.append(newRecord)
+      
     #jsonArray.append((words[0], words[1:]))
     s3 = 'Record has been successfully added. Thank you.'
     return render(request,'insert.html',{'insert':s3})
@@ -140,6 +179,9 @@ def modify_record(request):
             break
         else:
             s4 = 'Sorry, record ' + inputID + ' not found. Try again.'
+            
+    modifylist=[inputID, inputCat,inputValue,inputDate]
+     
     return render(request,'insert.html',{'modify':s4})
 
 def backup_record(request):
@@ -361,7 +403,8 @@ def fully_vaccinated_analytics(request):
         elif i['demographic_value'] == 'Unknown/undifferentiated': 
             otherFullVacc += i['fully_vaccinated']
             otherPartVacc += i['at_least_one_dose']
-
+      
+    
     return render(request, 'analytics.html', {
         'overallFullVacc':overallFullVacc,
         'overallPartVacc':overallPartVacc,
@@ -374,20 +417,25 @@ def fully_vaccinated_analytics(request):
         })
 
 def ageGroup(request):
+    
+    
     under_eighteen = 0
     over_eighteen = 0
     over_fifty = 0
     over_sixtyfive = 0
-    for i in data:
+    
+    
+    for i in data: 
         if i['demographic_value'] == '17-Dec': # JSON parsed this weirdly, so it converted the label "12-17" to "17-Dec" although it's the same value
-            under_eighteen += i['total_doses']
+             under_eighteen += i['total_doses']
         elif i['demographic_value'] == '18-49': 
             over_eighteen += i['total_doses']
         elif i['demographic_value'] == '50-64': 
             over_fifty+= i['total_doses']
         elif i['demographic_value'] == '65+': 
             over_sixtyfive+= i['total_doses']
-
+            
+                  
     return render(request, 'analytics.html', {
         'under_eighteen':under_eighteen,
         'over_eighteen':over_eighteen,
@@ -396,7 +444,133 @@ def ageGroup(request):
         })
 
 
+#------------------------ Increment Analysis -------------------------
+
+
+def Increment_ageGroup(request):
+    
+    global saveAge
+    global newage
+    global incremAge
+    
+    under_eighteen = 0
+    over_eighteen = 0
+    over_fifty = 0
+    over_sixtyfive = 0
+    
+    
+    for i in data: 
+        if i['demographic_value'] == '17-Dec': # JSON parsed this weirdly, so it converted the label "12-17" to "17-Dec" although it's the same value
+             under_eighteen += i['total_doses']
+        elif i['demographic_value'] == '18-49': 
+            over_eighteen += i['total_doses']
+        elif i['demographic_value'] == '50-64': 
+            over_fifty+= i['total_doses']
+        elif i['demographic_value'] == '65+': 
+            over_sixtyfive+= i['total_doses']
+            
+    #  initially to check if list is empty or not
+    if not saveAge: 
+        saveAge = [ under_eighteen, over_eighteen, over_fifty, over_sixtyfive] # initially save resulte
+        incremAge = [0,0,0,0]
+    else:
+        newage = [ under_eighteen, over_eighteen, over_fifty, over_sixtyfive] # update/insert/delete record 
+        incremAge[0]=saveAge[0]-newage[0] # increment computation
+        incremAge[1]=saveAge[0]-newage[0] # increment computation
+        incremAge[2]=saveAge[0]-newage[0] # increment computation
+        incremAge[3]=saveAge[0]-newage[0] # increment computation    
+      
+        under_eighteen = under_eighteen + incremAge[0]
+        under_eighteen = under_eighteen + incremAge[1] 
+        over_fifty = over_fifty + incremAge[2]
+        over_sixtyfive = over_sixtyfive  + incremAge[3]
+            
+    return render(request, 'analytics.html', {
+        'under_eighteen':under_eighteen,
+        'over_eighteen':under_eighteen,
+        'over_fifty':over_fifty,
+        'over_sixtyfive':over_sixtyfive
+ 
+        })
+
+   
 #-----------------------------------------------
+
+def increment_gander(request):
+    
+    # create data structure list
+    global saveGander  # save initial result
+    global newGander   # save result of value after insert/update/delete
+    global incremGander # save increment value 
+    
+    overallFullVacc = 0
+    overallPartVacc = 0
+
+    maleFullVacc = 0
+    malePartVacc = 0
+
+    femFullVacc = 0
+    femPartVacc = 0
+
+    otherPartVacc = 0
+    otherFullVacc = 0
+
+    for i in data:
+        if i['demographic_category'] == 'Gender':
+            overallFullVacc += i['fully_vaccinated']
+            overallPartVacc += i['at_least_one_dose'] #need to use at_least_one_dose parameter to accurately count jj doses with the others
+
+        if i['demographic_value'] == 'Male': 
+            maleFullVacc += i['fully_vaccinated']
+            malePartVacc += i['at_least_one_dose']
+        elif i['demographic_value'] == 'Female': 
+            femFullVacc += i['fully_vaccinated']
+            femPartVacc += i['at_least_one_dose']
+        elif i['demographic_value'] == 'Unknown/undifferentiated': 
+            otherFullVacc += i['fully_vaccinated']
+            otherPartVacc += i['at_least_one_dose']
+      
+          
+        #saveGander = [overallFullVacc, overallPartVacc,maleFullVacc , malePartVacc,femFullVacc,femPartVacc, otherPartVacc,otherFullVacc ]
+        #  initially calculated results save into list  
+        # check if empyt list or not , if empyt  save initial value
+        if not saveGander: 
+             # initially save resulte
+             saveGander = [overallFullVacc, overallPartVacc,maleFullVacc , malePartVacc,femFullVacc,femPartVacc, otherPartVacc,otherFullVacc ]
+             incremGander = [0,0,0,0,0,0,0,0]
+        else:
+             newGander = [overallFullVacc, overallPartVacc,maleFullVacc , malePartVacc,femFullVacc,femPartVacc, otherPartVacc,otherFullVacc ] # update/insert/delete record 
+        
+        incremGander[0]=saveGander[0]-newGander[0] # increment computation
+        incremGander[1]=saveGander[1]-newGander[1]
+        incremGander[2]=saveGander[2]-newGander[2]
+        incremGander[3]=saveGander[3]-newGander[3] # increment computation
+        incremGander[4]=saveGander[4]-newGander[4]
+        incremGander[5]=saveGander[5]-newGander[5]
+        incremGander[6]=saveGander[6]-newGander[6]
+        incremGander[7]=saveGander[7]-newGander[7]
+        
+        overallFullVacc = overallFullVacc + incremGander[0]
+        overallPartVacc = overallPartVacc + incremGander[1]
+        maleFullVacc = maleFullVacc + incremGander[2]
+        malmalePartVacc = malmalePartVacc + incremGander[3]
+        femFullVacc = femFullVacc + incremGander[4]
+        femPartVacc = femPartVacc + incremGander[5]
+        otherPartVacc = otherPartVacc + incremGander[6]
+        otherFullVacc = otherFullVacc + incremGander[7]
+       
+    return render(request, 'analytics.html', {
+        'overallFullVacc':overallFullVacc,
+        'overallPartVacc':overallPartVacc,
+        'maleFullVacc':maleFullVacc,
+        'malePartVacc':malePartVacc,
+        'femFullVacc':femFullVacc,
+        'femPartVacc':femPartVacc,
+        'otherPartVacc':otherPartVacc,
+        'otherFullVacc':otherFullVacc
+        })
+    
+
 def increment_analytics(request):
  
     agefully18to49 =0
@@ -423,6 +597,37 @@ def increment_analytics(request):
     othercremfully = 0
     incrementother =0
     
+    testvalue =0
+    test=[]
+    saverecord=[]
+    
+    
+    for i in data:
+        record =[
+                i['ID'],        
+                i['demographic_category'], 
+                i['demographic_value'], 
+                i['administered_date'],
+                i['total_doses'] ,
+                i['cumulative_total_doses'], 
+                i['pfizer_doses'], 
+                i['cumulative_pfizer_doses'] ,
+                i['moderna_doses'] ,
+                i['cumulative_moderna_doses'],  
+                i['jj_doses'] ,
+                i['cumulative_jj_doses'] , 
+                i['partially_vaccinated'],  
+                i['total_partially_vaccinated'] ,
+                i['fully_vaccinated'] ,
+                i['cumulative_fully_vaccinated'] ,
+                i['at_least_one_dose'] , 
+            ]
+                 
+ 
+    save=[]
+    save.append(record)
+    
+       
     for i in data:
          
         if i['demographic_value'] == '18-49':
@@ -443,7 +648,16 @@ def increment_analytics(request):
         elif i['demographic_value'] == 'Unknown/undifferentiated': 
             otherfully += i['fully_vaccinated']
             othercremfully += i['cumulative_fully_vaccinated']
+            
+        #test=[   otherfully, othercremfully  ]  
+        global Insertlist
+        #Insertlist=[otherfully,  othercremfully]
         
+        #Insertlist.append(otherfully)
+        #Insertlist.append(othercremfully)
+       
+        #testvalue = test[0] - test[1]
+        #testvalue = Insertlist[0] - Insertlist[1]
         
         increment18to49 = agecumfully18to49 - agefully18to49
         increment50to64 = agecumfully50to64 - agefully50to64
@@ -453,9 +667,13 @@ def increment_analytics(request):
         incrementfem =femcremfully-femfully
         incrementother = othercremfully - otherfully 
      
-    
+     
+        
+        global insertlist
+        
     return render(request, 'increment.html', {
-          
+        
+        'testvalue':testvalue,
         'increment18to49':increment18to49, 
         'increment50to64' : increment50to64,
         'increment65up' : increment65up,
@@ -465,3 +683,5 @@ def increment_analytics(request):
         'incrementother':incrementother
         
         })
+        
+        
