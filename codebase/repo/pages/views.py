@@ -49,7 +49,9 @@ increment=[]
 saveAge=[]
 newage=[]
 incremAge=[]
-
+savemothly=[]
+newmonthly=[]
+incremonthly=[]
 #search method
 def results(request):
     input = request.GET['search'] #retrieves the GET for search
@@ -570,6 +572,207 @@ def increment_gander(request):
         'otherFullVacc':otherFullVacc
         })
     
+
+def monthly_increment_analytics(request):
+    
+    
+    
+    global savemothly
+    global newmonthly
+    global incremonthly
+    sm_v_a = 'Chart is made'
+
+    blankEntries = 0
+
+    July20 = 0
+    August20 = 0
+    September20 = 0
+    October20 = 0
+    November20 = 0
+    December20 = 0
+
+    January21 = 0
+    February21 = 0
+    March21 = 0
+    April21 = 0
+    May21 = 0
+    June21 = 0
+    July21 = 0
+    August21 = 0
+    September21 = 0
+    October21 = 0
+    
+    currentDate = ""
+    currentMonth = ""
+    currentDay = ""
+    currentYear = ""
+
+    for i in data:
+    
+        currentDate = i['administered_date']
+        if len(currentDate) != "0":
+            currentMonth, currentDay, currentYear = currentDate.split('/')
+        else:
+            currentMonth = "0"
+            currentDay = "0"
+            currentYear = "0"
+    
+        if i['demographic_category'] == 'Gender': #using gender because someone can be white, male, 65+ for example and we would count them three times. This prevents recounting
+            if currentMonth == "0":
+                blankEntries += i['total_doses']
+            elif currentMonth == "1":
+                January21 += i['total_doses']
+            elif currentMonth == "2":
+                February21 += i['total_doses']
+            elif currentMonth == "3":
+                March21 += i['total_doses']
+            elif currentMonth == "4":
+                April21 += i['total_doses']
+            elif currentMonth == "5":
+                May21 += i['total_doses']
+            elif currentMonth == "6":
+                June21 += i['total_doses']
+            elif currentMonth == "7":
+                if currentYear == "20":
+                    July20 += i['total_doses']
+                else:
+                    July21 += i['total_doses']
+            elif currentMonth == "8":
+                if currentYear == "20":
+                    August20 += i['total_doses']
+                else:
+                    August21 += i['total_doses']
+            elif currentMonth == "9":
+                if currentYear == "20":
+                    September20 += i['total_doses']
+                else:
+                    September21 += i['total_doses']
+            elif currentMonth == "10":
+                if currentYear == "20":
+                    October20 += i['total_doses']
+                else:
+                    October21 += i['total_doses']
+            elif currentMonth == "11":
+                if currentYear == "20":
+                    November20 += i['total_doses']
+                else:
+                    November21 += i['total_doses']
+            elif currentMonth == "12":
+                if currentYear == "20":
+                    December20 += i['total_doses']
+                else:
+                    December21 += i['total_doses']
+            else:
+                sm_v_a = 'invalid date found'
+                
+        if not savemothly: 
+             # initially save resulte
+             savemothly = [
+                                July20,
+                                August20,
+                                September20,
+                                October20,
+                                
+                                November20,
+                                December20,
+                                January21,
+                                February21,
+                                
+                                March21,
+                                April21,
+                                May21,
+                                June21,
+                                
+                                July21,
+                                August21,
+                                September21,
+                                October21
+                  ]
+             incremonthly = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0]
+        else:
+             newmonthly = [
+                                July20,
+                                August20,
+                                September20,
+                                October20,
+                                
+                                November20,
+                                December20,
+                                January21,
+                                February21,
+                                
+                                March21,
+                                April21,
+                                May21,
+                                June21,
+                                
+                                July21,
+                                August21,
+                                September21,
+                                October21 ]     
+              
+     
+        incremonthly[0] = savemothly[0]-newmonthly[0]
+        incremonthly[1] = savemothly[1]-newmonthly[1]
+        incremonthly[2] = savemothly[2]-newmonthly[2]
+        incremonthly[3] = savemothly[3]-newmonthly[3] 
+        
+        incremonthly[4] = savemothly[4]-newmonthly[4]
+        incremonthly[5] = savemothly[5]-newmonthly[5]
+        incremonthly[6] = savemothly[6]-newmonthly[6]
+        incremonthly[7] = savemothly[7]-newmonthly[7] 
+        
+        incremonthly[8] = savemothly[8]-newmonthly[8]
+        incremonthly[9] = savemothly[9]-newmonthly[9]
+        incremonthly[10] = savemothly[10]-newmonthly[10]
+        incremonthly[11] = savemothly[11]-newmonthly[11] 
+        
+        incremonthly[12] = savemothly[12]-newmonthly[12]
+        incremonthly[13] = savemothly[13]-newmonthly[13]
+        incremonthly[14] = savemothly[14]-newmonthly[14]
+        incremonthly[15] = savemothly[15]-newmonthly[15]
+        
+        July20 = July20 + incremonthly[0]
+        August20 = August20+incremonthly[1]
+        September20 = September20+incremonthly[2]
+        October20 = October20+incremonthly[3]
+        
+        November20 = November20+incremonthly[4]
+        December20 = December20+incremonthly[5]
+        January21 = January21+incremonthly[6]
+        February21 = February21+incremonthly[7]
+        
+        March21=March21+incremonthly[8]
+        May21=May21+incremonthly[9]
+        April21=April21+incremonthly[10]
+        June21=June21+incremonthly[11]
+        
+        July21 = July21+incremonthly[12]
+        August21 = August21+incremonthly[13]
+        September21 = September21+incremonthly[14]
+        October21 =October21+incremonthly[15]
+            
+            
+    return render(request, 'analytics.html', {
+        'text':sm_v_a,
+        'July20':July20,
+        'August20':August20,
+        'September20':September20,
+        'October20':October20,
+        'November20':November20,
+        'December20':December20,
+        'January21':January21,
+        'February21':February21,
+        'March21':March21,
+        'April21':April21,
+        'May21':May21,
+        'June21':June21,
+        'July21':July21,
+        'August21':August21,
+        'September21':September21,
+        'October21':October21
+        })
+
 
 def increment_analytics(request):
  
