@@ -572,11 +572,10 @@ def increment_gander(request):
         'otherFullVacc':otherFullVacc
         })
     
-
+'''
 def monthly_increment_analytics(request):
     
-    
-    
+
     global savemothly
     global newmonthly
     global incremonthly
@@ -608,15 +607,15 @@ def monthly_increment_analytics(request):
     currentYear = ""
 
     for i in data:
-    
-        currentDate = i['administered_date']
-        if len(currentDate) != "0":
+        
+        currentDate1 = i['administered_date']
+        if len(currentDate1) != "0":
             currentMonth, currentDay, currentYear = currentDate.split('/')
         else:
             currentMonth = "0"
             currentDay = "0"
             currentYear = "0"
-    
+        
         if i['demographic_category'] == 'Gender': #using gender because someone can be white, male, 65+ for example and we would count them three times. This prevents recounting
             if currentMonth == "0":
                 blankEntries += i['total_doses']
@@ -772,7 +771,8 @@ def monthly_increment_analytics(request):
         'September21':September21,
         'October21':October21
         })
-
+        
+'''
 
 def increment_analytics(request):
  
@@ -886,5 +886,5 @@ def increment_analytics(request):
         'incrementother':incrementother
         
         })
-        
+       
         
