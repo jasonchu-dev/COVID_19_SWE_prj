@@ -77,9 +77,9 @@ def delete_record(request):
     for i in data:
         if input == str(i['ID']) : #this works in terms of getting it to 'delete' everytime surver runs 
             i['ID'] = None        #will not show up in GUI anymore...back end still needs to fix to update json
-            i['demographic_category'] = 0
-            i['demographic_value']  = 0
-            i['administered_date'] = 0
+            i['demographic_category'] = "0"
+            i['demographic_value']  = "0"
+            i['administered_date'] = "0"
             i['total_doses'] = 0
             i['cumulative_total_doses'] = 0
             i['pfizer_doses'] = 0
