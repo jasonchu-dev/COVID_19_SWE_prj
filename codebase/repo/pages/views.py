@@ -77,9 +77,9 @@ def delete_record(request):
     for i in data:
         if input == str(i['ID']) : #this works in terms of getting it to 'delete' everytime surver runs 
             i['ID'] = None        #will not show up in GUI anymore...back end still needs to fix to update json
-            i['demographic_category'] = "0"
-            i['demographic_value']  = "0"
-            i['administered_date'] = "0"
+            i['demographic_category'] = ""
+            i['demographic_value']  = ""
+            i['administered_date'] = ""
             i['total_doses'] = 0
             i['cumulative_total_doses'] = 0
             i['pfizer_doses'] = 0
@@ -141,7 +141,7 @@ def insert_record(request):
            "demographic_category": inputCat,
            "demographic_value": inputValue,
            "administered_date": inputDate,
-           "total_doses": 0,
+           "total_doses": 1,
            "cumulative_total_doses": 0,
            "pfizer_doses": 0,
            "cumulative_pfizer_doses": 0,
@@ -572,11 +572,10 @@ def increment_gander(request):
         'otherFullVacc':otherFullVacc
         })
     
-
+'''
 def monthly_increment_analytics(request):
     
-    
-    
+
     global savemothly
     global newmonthly
     global incremonthly
@@ -608,15 +607,15 @@ def monthly_increment_analytics(request):
     currentYear = ""
 
     for i in data:
-    
-        currentDate = i['administered_date']
-        if len(currentDate) != "0":
+        
+        currentDate1 = i['administered_date']
+        if len(currentDate1) != "0":
             currentMonth, currentDay, currentYear = currentDate.split('/')
         else:
             currentMonth = "0"
             currentDay = "0"
             currentYear = "0"
-    
+        
         if i['demographic_category'] == 'Gender': #using gender because someone can be white, male, 65+ for example and we would count them three times. This prevents recounting
             if currentMonth == "0":
                 blankEntries += i['total_doses']
@@ -772,7 +771,8 @@ def monthly_increment_analytics(request):
         'September21':September21,
         'October21':October21
         })
-
+        
+'''
 
 def increment_analytics(request):
  
@@ -886,5 +886,5 @@ def increment_analytics(request):
         'incrementother':incrementother
         
         })
-        
+       
         
