@@ -15,6 +15,5 @@ Mac and Windows will have the same installation process.
    ```
    python manage.py runserver
    ```
-5. Copy and paste the link below in a web browser to view the server.
-   http://127.0.0.1:8000/
+5. Copy and paste the link in a web browser to view the server: http://127.0.0.1:8000/
 
