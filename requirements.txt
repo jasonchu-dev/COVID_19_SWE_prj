@@ -1,7 +1,7 @@
 asn1crypto==0.24.0
 backports.entry-points-selectable==1.1.0
 certifi==2021.10.8
-chardet==4.0.0
+chardet==3.0.2
 configparser==4.0.2
 contextlib2==0.6.0.post1
 cryptography==2.1.4
@@ -19,7 +19,7 @@ pathlib2==2.3.6
 pipenv==2021.5.29
 platformdirs==2.0.2
 pycrypto==2.6.1
-pygobject==3.26.1
+pygobject==3.27.0
 pyOpenSSL==17.5.0
 pytz==2021.3
 pyxdg==0.25
@@ -29,8 +29,8 @@ SecretStorage==2.3.1
 singledispatch==3.7.0
 six==1.11.0
 tabulate==0.8.9
-typing==3.10.0.0
-urllib3==1.26.7
+typing==3.5.0
+urllib3==1.21.1
 virtualenv==20.8.1
 virtualenv-clone==0.5.7
 zipp==1.2.0

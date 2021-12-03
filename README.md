@@ -22,3 +22,6 @@ Mac and Windows will have the same installation process.
 * Django
 * Chart.js
 
+## Automated Testing and Continuous Integration
+
+* Django Workflow by Github Actions
