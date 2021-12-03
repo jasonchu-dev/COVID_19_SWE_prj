@@ -1,4 +1,5 @@
 # COVID-19 Vaccination Data Website
+
 ##About
 Authors: Scott Mesdjian, Brayan Montiel, Hongan Zhang, Jason Chu, Mahamadsaad Sheikh
 
