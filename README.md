@@ -17,3 +17,8 @@ Mac and Windows will have the same installation process.
    ```
 5. Copy and paste the link in a web browser to view the server: http://127.0.0.1:8000/
 
+## Technologies Used:
+
+* Django
+* Chart.js
+
