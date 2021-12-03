@@ -25,3 +25,4 @@ Mac and Windows will have the same installation process.
 ## Automated Testing and Continuous Integration
 
 * Django Workflow by Github Actions
+* Tests can be found in codebase/repo/pages/tests.py
