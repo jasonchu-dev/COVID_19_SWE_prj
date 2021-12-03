@@ -10,4 +10,9 @@ Mac and Windows will have the same installation process.
 
 1. Install Python3 https://www.python.org/downloads/
 2. Install Django https://docs.djangoproject.com/en/3.2/topics/install/
-3. 
+3. In terminal navigate to the repo folder cs180project-022-cs180ucrejects/codebase/repo/
+4. To run the server use the command:
+   ```
+   python manage.py runserver
+   ```
+
